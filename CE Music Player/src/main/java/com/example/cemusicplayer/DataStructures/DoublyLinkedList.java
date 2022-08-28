@@ -1,19 +1,19 @@
 package com.example.cemusicplayer.DataStructures;
 
 
-public class listD <T> {
-    private nodeD<T> first;
-    private nodeD<T> last;
+public class DoubleLinkedList<T> {
+    private DoubleNode<T> first;
+    private DoubleNode<T> last;
     private int size;
 
-    public listD(){
+    public DoubleLinkedList(){
         this.first=null;
         this.last=null;
         this.size=0;
     }
 
     public void add(T data){
-        nodeD<T> newNode=new nodeD<>(data);
+        DoubleNode<T> newNode=new DoubleNode<>(data);
         if (first==null){
             first=newNode;
             last=first;
@@ -27,17 +27,17 @@ public class listD <T> {
         this.size++;
 
     }
-    public nodeD<T> getNode(int position){
-        nodeD<T> node = last;
+    public DoubleNode<T> getNode(int position){
+        DoubleNode<T> node = last;
         for(int index=size-1;index>position;index--){
             node=node.getBack();
         }
         return node;
     }
-    private nodeD<T> back(int position ){
+    private DoubleNode<T> back(int position ){
         return getNode(position).getBack();
     }
-    private nodeD<T> next(int position){
+    private DoubleNode<T> next(int position){
         return getNode(position).getNext();
 
 
@@ -51,21 +51,21 @@ public class listD <T> {
                 throw new IndexOutOfBoundsException();
             }
             else if (position==0){
-                nodeD<T> currentNode=getNode(position);
-                nodeD<T> nextNode=currentNode.getNext();
+                DoubleNode<T> currentNode=getNode(position);
+                DoubleNode<T> nextNode=currentNode.getNext();
                 nextNode.setBack(null);
                 first=nextNode;
             }
             else if(position==size-1){
-                nodeD<T> currentNode=getNode(position);
-                nodeD<T> backNode=currentNode.getBack();
+                DoubleNode<T> currentNode=getNode(position);
+                DoubleNode<T> backNode=currentNode.getBack();
                 backNode.setNext(null);
                 last=backNode;
             }
             else{
-                nodeD<T> currentNode=getNode(position);
-                nodeD<T> backNode=currentNode.getBack();
-                nodeD<T> nextNode=currentNode.getNext();
+                DoubleNode<T> currentNode=getNode(position);
+                DoubleNode<T> backNode=currentNode.getBack();
+                DoubleNode<T> nextNode=currentNode.getNext();
                 backNode.setNext(nextNode);
                 nextNode.setBack(backNode);
             }

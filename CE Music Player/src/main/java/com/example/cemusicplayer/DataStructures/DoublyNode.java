@@ -1,13 +1,13 @@
 package com.example.cemusicplayer.DataStructures;
 
 
-    public class nodeD <T> {
+    public class DoubleNode<T> {
         private T data;
-        private nodeD<T> next;
-        private nodeD<T> back;
+        private DoubleNode<T> next;
+        private DoubleNode<T> back;
 
 
-        public nodeD(T data){
+        public DoubleNode(T data){
             this.data=data;
         }
 
@@ -19,19 +19,19 @@ package com.example.cemusicplayer.DataStructures;
             this.data = data;
         }
 
-        public nodeD<T> getNext() {
+        public DoubleNode<T> getNext() {
             return next;
         }
 
-        public void setNext(nodeD<T> next) {
+        public void setNext(DoubleNode<T> next) {
             this.next = next;
         }
 
-        public nodeD<T> getBack() {
+        public DoubleNode<T> getBack() {
             return back;
         }
 
-        public void setBack(nodeD<T> back) {
+        public void setBack(DoubleNode<T> back) {
             this.back = back;
         }
     }
