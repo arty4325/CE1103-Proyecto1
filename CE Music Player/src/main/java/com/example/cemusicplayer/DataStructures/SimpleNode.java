@@ -1,10 +1,10 @@
 package com.example.cemusicplayer.DataStructures;
 
-public class node <T>{
+public class SimpleNode<T>{
     private T data;
-    private node<T> next;
+    private SimpleNode<T> next;
 
-    public node(T data) {
+    public SimpleNode(T data) {
         this.data=data;
     }
 
@@ -16,11 +16,11 @@ public class node <T>{
         return this.data;
     }
 
-    public void setNext(node<T> next){
+    public void setNext(SimpleNode<T> next){
         this.next=next;
     }
 
-    public node<T> getNext(){
+    public SimpleNode<T> getNext(){
         return this.next;
     }
 

@@ -1,16 +1,16 @@
 package com.example.cemusicplayer.DataStructures;
 
-public class list <T> {
-    private node<T> head;
-    private node<T> tail;
+public class LinkedList<T> {
+    private SimpleNode<T> head;
+    private SimpleNode<T> tail;
     private int size;
-    public list(){
+    public LinkedList(){
         head = null;
     }
 
     public T get(int position) {
         int cot = 0;
-        node<T> node = head;
+        SimpleNode<T> node = head;
         if (getSize() > position) {
             while (cot != position) {
                 cot++;
@@ -24,8 +24,8 @@ public class list <T> {
 
 
     public T add(T data){
-        node<T> node = head;
-        node<T> newNode = new node<>(data);
+        SimpleNode<T> node = head;
+        SimpleNode<T> newNode = new SimpleNode<>(data);
         if(head == null){
             head = tail = newNode;
             this.size++;
@@ -41,8 +41,8 @@ public class list <T> {
     }
 
     public T delete(int position){
-        node<T> node = head;
-        node<T> FinalNode = head;
+        SimpleNode<T> node = head;
+        SimpleNode<T> FinalNode = head;
         if(size<position || position<0 ){
             throw new IndexOutOfBoundsException();
         }
