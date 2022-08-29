@@ -1,10 +1,7 @@
 package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.LinkedList;
-<<<<<<< HEAD
 import com.example.cemusicplayer.UserManager.SignUpUser;
-=======
->>>>>>> 2046ba624ebccd051bb326b02210ccf69f5f1119
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,19 +57,12 @@ public class SignUpController implements Initializable {
         Temp.add(Password);
         Temp.add(Email);
         Temp.add(Province);
-<<<<<<< HEAD
         SignUpUser.CreateUserFolder(Username);
-=======
->>>>>>> 2046ba624ebccd051bb326b02210ccf69f5f1119
         User.add(Temp);
         System.out.println((User.get(0)).getNext());
         System.out.println((User.get(0)).getNext());
         System.out.println((User.get(0)).getNext());
         System.out.println((User.get(0)).getNext());
-<<<<<<< HEAD
-=======
-
->>>>>>> 2046ba624ebccd051bb326b02210ccf69f5f1119
     }
     public void Login(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
