@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class UserController {
+public class SignUpController {
     private Stage stage;
     private Scene scene;
     private Parent root;

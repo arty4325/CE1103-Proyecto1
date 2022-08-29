@@ -4,10 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.Login">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.LoginController">
    <children>
-      <Button layoutX="89.0" layoutY="273.0" mnemonicParsing="false" onAction="#SignUp" text="Registrarse" />
-      <Button layoutX="437.0" layoutY="280.0" mnemonicParsing="false" onAction="#SignIn" text="Iniciar seccion" />
-      <Label layoutX="210.0" layoutY="116.0" prefHeight="69.0" prefWidth="181.0" text="Elija si registrarse o iniciar seccion" />
+      <Button layoutX="138.0" layoutY="268.0" mnemonicParsing="false" onAction="#SignUp" text="Registrarse" />
+      <Button layoutX="388.0" layoutY="268.0" mnemonicParsing="false" onAction="#SignIn" text="Iniciar sesion" />
+      <Label layoutX="213.0" layoutY="131.0" prefHeight="69.0" prefWidth="175.0" text="Elija si registrarse o iniciar sesion" />
    </children>
 </AnchorPane>
