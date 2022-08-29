@@ -22,6 +22,7 @@ public class LinkedList<T> {
         return node.getData();
     }
 
+
     public T getNext(){
         SimpleNode<T> Temp = head;
         if(observer == head){
