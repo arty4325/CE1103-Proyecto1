@@ -61,6 +61,7 @@ public class SignUpController implements Initializable {
         System.out.println((User.get(0)).getNext());
         System.out.println((User.get(0)).getNext());
         System.out.println((User.get(0)).getNext());
+
     }
     public void Login(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
