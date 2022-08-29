@@ -4,12 +4,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.UserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.UserController">
    <children>
       <Button fx:id="UserLoader" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#LoadTheUser" prefHeight="25.0" prefWidth="130.0" text="Load User" />
       <TextField fx:id="UserName" layoutX="14.0" layoutY="63.0" />
       <TextField fx:id="email" layoutX="14.0" layoutY="99.0" />
       <TextField fx:id="password" layoutX="14.0" layoutY="132.0" />
+      <Button layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#Login" text="Regresar" />
    </children>
 </AnchorPane>
