@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.Login">
+   <children>
+      <Button layoutX="89.0" layoutY="273.0" mnemonicParsing="false" onAction="#SignUp" text="Registrarse" />
+      <Button layoutX="437.0" layoutY="280.0" mnemonicParsing="false" onAction="#SignIn" text="Iniciar seccion" />
+      <Label layoutX="210.0" layoutY="116.0" prefHeight="69.0" prefWidth="181.0" text="Elija si registrarse o iniciar seccion" />
+   </children>
+</AnchorPane>
