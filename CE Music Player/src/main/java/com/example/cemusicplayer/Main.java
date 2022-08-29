@@ -1,5 +1,6 @@
 package com.example.cemusicplayer;
 
+import com.example.cemusicplayer.DataStructures.LinkedList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

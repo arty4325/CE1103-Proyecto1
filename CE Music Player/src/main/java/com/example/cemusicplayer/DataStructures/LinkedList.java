@@ -2,7 +2,7 @@ package com.example.cemusicplayer.DataStructures;
 
 public class LinkedList<T> {
     private SimpleNode<T> head;
-    private SimpleNode<T> tail;
+    private SimpleNode<T> observer;
     private int size;
     public LinkedList(){
         head = null;
@@ -22,12 +22,26 @@ public class LinkedList<T> {
         return node.getData();
     }
 
+    public T getNext(){
+        SimpleNode<T> Temp = head;
+        if(observer == head){
+            observer = observer.getNext();
+            return get(0);
+        } else if (observer != null){
+            Temp = observer;
+            observer = observer.getNext();
+            return Temp.getData();
+        } else {
+            return null;
+        }
+    }
+
 
     public T add(T data){
         SimpleNode<T> node = head;
         SimpleNode<T> newNode = new SimpleNode<>(data);
         if(head == null){
-            head = tail = newNode;
+            head = observer = newNode;
             this.size++;
             return newNode.getData();
         } else {
