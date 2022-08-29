@@ -1,5 +1,6 @@
 package com.example.cemusicplayer;
 
+import com.example.cemusicplayer.DataStructures.LinkedList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,15 +41,26 @@ public class SignUpController implements Initializable {
     String Email;
     String Password;
     String Username;
+    String Province;
     @FXML
     public void LoadTheUser(MouseEvent event) {
         Email = email.getText();
         Password = password.getText();
         Username = UserName.getText();
 
-        System.out.println(Username);
-        System.out.println(Password);
-        System.out.println(Email);
+
+
+        LinkedList<LinkedList> User = new LinkedList<>();
+        LinkedList<String> Temp = new LinkedList<>();
+        Temp.add(Username);
+        Temp.add(Password);
+        Temp.add(Email);
+        Temp.add(Province);
+        User.add(Temp);
+        System.out.println((User.get(0)).getNext());
+        System.out.println((User.get(0)).getNext());
+        System.out.println((User.get(0)).getNext());
+        System.out.println((User.get(0)).getNext());
     }
     public void Login(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -62,7 +74,7 @@ public class SignUpController implements Initializable {
     @FXML
     void SelectProvince(ActionEvent event) {
         String selected = Provincias.getSelectionModel().getSelectedItem().toString();
-        System.out.println(selected);
+        Province = selected;
     }
 
     @Override
