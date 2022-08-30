@@ -10,13 +10,13 @@ public class SignUpUser {
     public static void CreateUserFolder(String Email, String Username, String Province, String Password) throws IOException {
         File Dir = new File("Users/" + Email);
         if(!Dir.exists()){
-            FileWriter file = new FileWriter("Users/Email.txt", true);
+            //FileWriter file = new FileWriter("Users/Email.txt", true);
 
-            BufferedWriter bw = new BufferedWriter(file);
-            bw.write(Email);
-            bw.newLine();
-            bw.close();
-            file.close();
+            //BufferedWriter bw = new BufferedWriter(file);
+            //bw.write(Email);
+            //bw.newLine();
+            //bw.close();
+            //file.close();
             Dir.mkdirs();
 
             File InfoFile = new File("Users/" + Email  + "/UserInformation.txt");
