@@ -48,21 +48,8 @@ public class SignUpController implements Initializable {
         Email = email.getText();
         Password = password.getText();
         Username = UserName.getText();
+        SignUpUser.CreateUserFolder(Email, Username, Province, Password);
 
-
-
-        LinkedList<LinkedList> User = new LinkedList<>();
-        LinkedList<String> Temp = new LinkedList<>();
-        Temp.add(Username);
-        Temp.add(Password);
-        Temp.add(Email);
-        Temp.add(Province);
-        SignUpUser.CreateUserFolder(Username);
-        User.add(Temp);
-        System.out.println((User.get(0)).getNext());
-        System.out.println((User.get(0)).getNext());
-        System.out.println((User.get(0)).getNext());
-        System.out.println((User.get(0)).getNext());
     }
     public void Login(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
