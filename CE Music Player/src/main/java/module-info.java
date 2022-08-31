@@ -1,6 +1,7 @@
 module com.example.cemusicplayer {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jaco.mp3.player;
 
 
     opens com.example.cemusicplayer to javafx.fxml;

@@ -53,6 +53,16 @@ public class SignInController {
             LinkedList<String> AccoutInformation = new LinkedList<>();
             AccoutInformation = FileInList.LoadFileOfStringsIntoList(InfoFile);
             if(Password.equals(AccoutInformation.get(3))){
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Music.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
                 System.out.println("Contra Correcta");
             } else {
                 System.out.println("Contra Incorrecta");
