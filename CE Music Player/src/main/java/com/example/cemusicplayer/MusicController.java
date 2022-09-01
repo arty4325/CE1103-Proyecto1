@@ -19,4 +19,7 @@ public class MusicController {
     public void Pause(){
         player.pause();
     }
+    public void playAgain(){
+        player.play();
+    }
 }
