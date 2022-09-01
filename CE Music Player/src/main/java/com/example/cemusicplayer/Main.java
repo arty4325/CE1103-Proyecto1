@@ -1,16 +1,11 @@
 package com.example.cemusicplayer;
 
-import com.example.cemusicplayer.InformationManager.FileInList;
-import com.example.cemusicplayer.DataStructures.LinkedList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Main extends Application {
 

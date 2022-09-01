@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.AbstractCollection;
 
 public class SignInController {
     private Stage stage;
