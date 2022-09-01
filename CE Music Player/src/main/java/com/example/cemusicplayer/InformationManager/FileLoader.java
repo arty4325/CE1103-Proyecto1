@@ -24,7 +24,13 @@ public class FileLoader {
     public static void SongLoader(String Email) throws IOException {
         FileChooser fc = new FileChooser();
         File selectedFile = fc.showOpenDialog(null);
-        File UserFile = new File("Users/" + Email + selectedFile.getName());
+        File UserFile = new File("Users/" + Email + "/" + selectedFile.getName());
+        File Songs = new File("Users/" + Email + "/" + selectedFile.getName() + ".txt");
+        FileWriter file = new FileWriter("Users/" + Email + "/ListOfSongs.txt", true);
+        BufferedWriter bw = new BufferedWriter(file);
+        bw.write(selectedFile.getName());
+        bw.newLine();
+        bw.close();
         copyFileUsingStream(selectedFile, UserFile);
     }
 }

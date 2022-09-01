@@ -1,6 +1,5 @@
 package com.example.cemusicplayer;
 
-import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.UserManager.SignUpUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -43,6 +42,8 @@ public class SignUpController implements Initializable {
     String Password;
     String Username;
     String Province;
+
+
     @FXML
     public void LoadTheUser(MouseEvent event) throws IOException {
         Email = email.getText();
@@ -51,6 +52,7 @@ public class SignUpController implements Initializable {
         SignUpUser.CreateUserFolder(Email, Username, Province, Password);
 
     }
+
     public void Login(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

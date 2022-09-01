@@ -30,8 +30,12 @@ public class SignInController {
 
     @FXML
     private Button UserSignIn;
-    String Email;
-    String Password;
+    public static String Email;
+    private String Password;
+
+    public static String getEmail() {
+        return Email;
+    }
 
     public void Login(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -68,4 +72,6 @@ public class SignInController {
             }
         }
     }
+
+
 }
