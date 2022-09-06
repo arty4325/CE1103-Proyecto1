@@ -2,6 +2,7 @@ package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 public class SignInController {
     private Stage stage;
@@ -58,7 +60,7 @@ public class SignInController {
             if(Password.equals(AccoutInformation.get(3))){
                 Parent root = null;
                 try {
-                    root = FXMLLoader.load(getClass().getResource("Music.fxml"));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
