@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class CreatePlaylistController {
@@ -25,7 +26,11 @@ public class CreatePlaylistController {
     void CreatePlaylist(ActionEvent event) {
         NameOfPlaylist = NameOfEntry.getText();
         System.out.println(NameOfPlaylist);
-
+        String Email = SignInController.getEmail();
+        File Dir = new File("Users/" + Email + "/" + NameOfPlaylist);
+        if(!Dir.exists()){
+            Dir.mkdirs();
+        }
     }
 
     @FXML

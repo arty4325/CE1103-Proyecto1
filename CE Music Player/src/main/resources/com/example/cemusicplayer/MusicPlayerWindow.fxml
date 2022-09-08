@@ -10,5 +10,6 @@
       <Button layoutX="203.0" layoutY="266.0" mnemonicParsing="false" onAction="#playAgain" text="reanudar" />
       <Button layoutX="331.0" layoutY="266.0" mnemonicParsing="false" text="Menos" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#LSongs" prefHeight="25.0" prefWidth="96.0" text="Create Playlist" />
+      <Button layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#AddMusic" prefHeight="25.0" prefWidth="132.0" text="Add Music To Playlist" />
    </children>
 </AnchorPane>

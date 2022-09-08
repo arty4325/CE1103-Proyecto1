@@ -21,16 +21,16 @@ public class FileLoader {
             os.close();
         }
     }
-    public static void SongLoader(String Email) throws IOException {
+    public static void SongLoader(String Email, String Playlist) throws IOException {
         FileChooser fc = new FileChooser();
         File selectedFile = fc.showOpenDialog(null);
-        File UserFile = new File("Users/" + Email + "/" + selectedFile.getName());
-        File Songs = new File("Users/" + Email + "/" + selectedFile.getName() + ".txt");
-        FileWriter file = new FileWriter("Users/" + Email + "/ListOfSongs.txt", true);
-        BufferedWriter bw = new BufferedWriter(file);
-        bw.write(selectedFile.getName());
-        bw.newLine();
-        bw.close();
+        File UserFile = new File("Users/" + Email + "/" + Playlist + "/" + selectedFile.getName());
+        //File Songs = new File("Users/" + Email + "/" + Playlist + "/" + selectedFile.getName() + ".txt");
+        FileWriter file = new FileWriter("Users/" + Email + "/" + Playlist + "/" + selectedFile.getName(), true);
+        //BufferedWriter bw = new BufferedWriter(file);
+        //bw.write(selectedFile.getName());
+        //bw.newLine();
+        //bw.close();
         copyFileUsingStream(selectedFile, UserFile);
     }
 }
