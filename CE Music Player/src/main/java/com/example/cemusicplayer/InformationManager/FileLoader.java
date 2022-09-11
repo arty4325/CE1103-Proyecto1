@@ -21,7 +21,7 @@ public class FileLoader {
             os.close();
         }
     }
-    public static void SongLoader(String Email, String Playlist) throws IOException {
+    public static String SongLoader(String Email, String Playlist) throws IOException {
         FileChooser fc = new FileChooser();
         File selectedFile = fc.showOpenDialog(null);
         File UserFile = new File("Users/" + Email + "/" + Playlist + "/" + selectedFile.getName());
@@ -32,5 +32,6 @@ public class FileLoader {
         //bw.newLine();
         //bw.close();
         copyFileUsingStream(selectedFile, UserFile);
+        return selectedFile.getName();
     }
 }

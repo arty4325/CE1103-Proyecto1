@@ -3,10 +3,23 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.AddMusicController">
    <children>
       <Button layoutX="42.0" layoutY="86.0" mnemonicParsing="false" onAction="#SearchSong" prefHeight="25.0" prefWidth="161.0" text="SearchSong" />
       <TextField fx:id="PlaylistName" layoutX="42.0" layoutY="52.0" />
+      <Button layoutX="42.0" layoutY="343.0" mnemonicParsing="false" onAction="#ReturnToMain" text="Return" />
+      <Text layoutX="42.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Of Playlist" />
+      <TextField fx:id="SongGenre" layoutX="357.0" layoutY="52.0" />
+      <TextField fx:id="SongArtist" layoutX="357.0" layoutY="86.0" />
+      <TextField fx:id="SongAlbum" layoutX="357.0" layoutY="118.0" />
+      <TextField fx:id="SongYear" layoutX="357.0" layoutY="152.0" />
+      <TextField fx:id="SongLyrics" layoutX="357.0" layoutY="188.0" />
+      <Text layoutX="300.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre" />
+      <Text layoutX="305.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist" />
+      <Text layoutX="302.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album" />
+      <Text layoutX="303.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" wrappingWidth="31.74609375" />
+      <Text layoutX="302.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lyrics" wrappingWidth="34.828125" />
    </children>
 </AnchorPane>

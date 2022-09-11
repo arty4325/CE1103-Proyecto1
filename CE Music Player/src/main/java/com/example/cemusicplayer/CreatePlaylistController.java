@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class CreatePlaylistController {
@@ -23,13 +25,20 @@ public class CreatePlaylistController {
     private String NameOfPlaylist;
 
     @FXML
-    void CreatePlaylist(ActionEvent event) {
+    void CreatePlaylist(ActionEvent event) throws IOException {
         NameOfPlaylist = NameOfEntry.getText();
         System.out.println(NameOfPlaylist);
         String Email = SignInController.getEmail();
         File Dir = new File("Users/" + Email + "/" + NameOfPlaylist);
         if(!Dir.exists()){
             Dir.mkdirs();
+            File ExistingPlaylists = new File("Users/" + Email + "/ExistingPlaylist.txt");
+            FileWriter PlaylistFileWriter = new FileWriter(ExistingPlaylists, true);
+            BufferedWriter Playlistbw = new BufferedWriter(PlaylistFileWriter);
+            Playlistbw.write(NameOfPlaylist);
+            Playlistbw.newLine();
+            Playlistbw.close();
+            PlaylistFileWriter.close();
         }
     }
 
