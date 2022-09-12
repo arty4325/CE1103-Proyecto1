@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -61,6 +63,74 @@ public class MusicPlayerController {
 
         }
 
+    }
+    public void volumeDown(Double d){
+        Mixer.Info [] mixers= AudioSystem.getMixerInfo();
+        for(Mixer.Info mixerInfo : mixers){
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            Line.Info[] lineInfo=mixer.getTargetLineInfo();
+            for(Line.Info lineI:lineInfo){
+                Line line =null;
+                boolean open = true;
+
+                try{
+                    line=mixer.getLine(lineI);
+                    open=line.isOpen() || line instanceof Clip;
+                    if(!open){
+                        line.open();
+                    }
+                    FloatControl controlV = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    float current=controlV.getValue();
+                    Double volumeC=d;
+                    float change=(float) ((float)current-(double)volumeC);
+                    controlV.setValue(change);
+                } catch (LineUnavailableException lineUnavailableException) {
+                }catch (IllegalArgumentException illegalArgumentException){
+                }finally {
+                    if(line!=null && !open){
+                        line.close();
+                    }
+                }
+            }
+        }
+
+    }
+    public void volumeUp(Double d){
+        Mixer.Info [] mixers= AudioSystem.getMixerInfo();
+        for(Mixer.Info mixerInfo : mixers){
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            Line.Info[] lineInfo=mixer.getTargetLineInfo();
+            for(Line.Info lineI:lineInfo){
+                Line line =null;
+                boolean open = true;
+
+                try{
+                    line=mixer.getLine(lineI);
+                    open=line.isOpen() || line instanceof Clip;
+                    if(!open){
+                        line.open();
+                    }
+                    FloatControl controlV = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    float current=controlV.getValue();
+                    Double volumeC=d;
+                    float change=(float) ((float)current+(double)volumeC);
+                    controlV.setValue(change);
+                } catch (LineUnavailableException lineUnavailableException) {
+                }catch (IllegalArgumentException illegalArgumentException){
+                }finally {
+                    if(line!=null && !open){
+                        line.close();
+                    }
+                }
+            }
+        }
+
+    }
+    public void Up(){
+        volumeUp(0.2);
+    }
+    public void down(){
+        volumeDown(0.2);
     }
 
 }
