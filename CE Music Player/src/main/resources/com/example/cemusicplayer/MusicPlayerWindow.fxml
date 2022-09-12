@@ -3,11 +3,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.MusicPlayerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.MusicPlayerController">
    <children>
       <Button layoutX="229.0" layoutY="207.0" mnemonicParsing="false" onAction="#play" text="Play" />
       <Button layoutX="331.0" layoutY="207.0" mnemonicParsing="false" onAction="#Pause" text="Pause" />
-      <Button layoutX="203.0" layoutY="266.0" mnemonicParsing="false" onAction="#playAgain" text="reanudar" />
       <Button layoutX="331.0" layoutY="266.0" mnemonicParsing="false" text="Menos" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#LSongs" prefHeight="25.0" prefWidth="96.0" text="Create Playlist" />
       <Button layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#AddMusic" prefHeight="25.0" prefWidth="132.0" text="Add Music To Playlist" />

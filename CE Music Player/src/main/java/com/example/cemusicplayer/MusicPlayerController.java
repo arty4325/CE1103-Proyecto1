@@ -12,7 +12,11 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
+
+
 public class MusicPlayerController {
+    boolean c=true;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -46,9 +50,17 @@ public class MusicPlayerController {
     }
 
     public void Pause(){
-        player.pause();
+
+
+        if (c== true){
+            player.pause();
+            c=false;
+        }else{
+            player.play();
+            c=true;
+
+        }
+
     }
-    public void playAgain(){
-        player.play();
-    }
+
 }

@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 public class CreatePlaylistController {
     private Stage stage;
     private Scene scene;
