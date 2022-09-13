@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -28,8 +30,11 @@ public class SignInController {
     private TextField EmailEntry;
 
     @FXML
-    private TextField PasswordEntry;
-
+    private PasswordField PasswordEntry;
+    @FXML
+    private TextField Passwords;
+    @FXML
+    private CheckBox checkBox;
     @FXML
     private Button UserSignIn;
     public static String Email;
@@ -74,6 +79,19 @@ public class SignInController {
             }
         }
     }
+    public void seePassword(ActionEvent event){
+        if (checkBox.isSelected()){
+            Passwords.setText(PasswordEntry.getText());
+            Passwords.setVisible(true);
+            PasswordEntry.setVisible(false);
+
+        }else{
+            PasswordEntry.setText(Passwords.getText());
+            PasswordEntry.setVisible(true);
+            Passwords.setVisible(false);
+        }
+    }
+
 
 
 }
