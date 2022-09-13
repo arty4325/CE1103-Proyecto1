@@ -38,6 +38,7 @@ public class LinkedList<T> {
     }
 
 
+
     public T add(T data){
         SimpleNode<T> node = head;
         SimpleNode<T> newNode = new SimpleNode<>(data);

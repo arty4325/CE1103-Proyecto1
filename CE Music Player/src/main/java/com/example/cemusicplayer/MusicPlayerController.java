@@ -1,29 +1,56 @@
 package com.example.cemusicplayer;
 
+import com.example.cemusicplayer.DataStructures.DoublyLinkedList;
+import com.example.cemusicplayer.DataStructures.LinkedList;
+import com.example.cemusicplayer.InformationManager.FileInList;
 import jaco.mp3.player.MP3Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-
 
 import javax.sound.sampled.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-
-public class MusicPlayerController {
+public class MusicPlayerController implements Initializable {
+    @FXML
+    private ComboBox<String> Playlist;
     boolean c=true;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-    MP3Player player;
-    File song=new File("MP3\\Slipknot - Snuff  Español.mp3");
+    DoublyLinkedList<String> LoadedPlaylist;
+    String PlayingPlaylist;
+    MP3Player player = new MP3Player();
+    File song; // = new File("MP3\\Slipknot - Snuff  Español.mp3");
+    @FXML
+    void LastSong(ActionEvent event) {
+        String ChoosedSong = LoadedPlaylist.getBack();
+        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+        player.addToPlayList(song);
+        player.skipForward();
+        System.out.println(ChoosedSong);
+    }
+
+    @FXML
+    void NextSong(ActionEvent event) {
+        String ChoosedSong = LoadedPlaylist.getNext();
+        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+        player.addToPlayList(song);
+        player.skipForward();
+        System.out.println(ChoosedSong);
+    }
 
     @FXML
     void LSongs(ActionEvent event) throws IOException {
@@ -45,8 +72,7 @@ public class MusicPlayerController {
     }
 
     public void play() {
-
-        player=new MP3Player();
+        System.out.println(PlayingPlaylist);
         player.addToPlayList(song);
         player.play();
     }
@@ -133,4 +159,29 @@ public class MusicPlayerController {
         volumeDown(0.2);
     }
 
+    @FXML
+    void PlaylistChooser(ActionEvent event) throws FileNotFoundException {
+        String selected = Playlist.getSelectionModel().getSelectedItem();
+        PlayingPlaylist = selected;
+        LoadedPlaylist = FileInList.LoadFileOfStringsIntoDoublyLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
+        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/ExistingPlaylist.txt");
+        LinkedList<String> list = new LinkedList<>();
+        try {
+            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if (list.getSize() > 0){
+            for(int i = 0; i < list.getSize(); i++){
+                Playlist.getItems().add(list.getNext());
+            }
+        }
+
+
+    }
 }
