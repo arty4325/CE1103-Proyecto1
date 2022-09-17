@@ -34,29 +34,29 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     private Button CircularBack;
-    boolean c=true;
-    boolean loop=true;
-
+    boolean c = true;
+    boolean loop = false;
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private DoublyLinkedList<String> LoadedPlaylist;
+    private DCLinkedList<String> LoadedPlaylist;
     private DCLinkedList<String> LoadedLoopPlaylist;
+    private int size;
 
     String PlayingPlaylist;
     MP3Player player = new MP3Player();
-    File song; // = new File("MP3\\Slipknot - Snuff  Español.mp3");
+    File song;
     @FXML
     void LastSong(ActionEvent event) {
-        if (loop==true){
-            String ChoosedSong = LoadedLoopPlaylist.getBackItem();
+        if (loop == false){
+            String ChoosedSong = LoadedPlaylist.getBackItemNotLoop();
+            System.out.println(LoadedPlaylist.getSize());
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
             System.out.println(ChoosedSong);
-            System.out.println("Button Is pressed");
-        }else {
-            String ChoosedSong = LoadedPlaylist.getBack();
+        }else if (loop == true){
+            String ChoosedSong = LoadedPlaylist.getBackItem();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
@@ -65,16 +65,17 @@ public class MusicPlayerController implements Initializable {
     }
 
     @FXML
-    void NextSong(ActionEvent event) {
-        if (loop==false){
-            String ChoosedSong = LoadedLoopPlaylist.getNextItem();
+    void NextSong(ActionEvent event) throws FileNotFoundException {
+        if (!loop){
+
+            String ChoosedSong = LoadedPlaylist.getNextItemNotLoop();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
             System.out.println(ChoosedSong);
             System.out.println("Loop Song");
-        } else {
-            String ChoosedSong = LoadedPlaylist.getNext();
+        } else if (loop){
+            String ChoosedSong = LoadedPlaylist.getNextItem();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
@@ -84,8 +85,6 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     void LSongs(ActionEvent event) throws IOException {
-        //String Email = SignInController.getEmail();
-        //FileLoader.SongLoader(Email);
         Parent root = FXMLLoader.load(getClass().getResource("CreatePlaylist.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -124,7 +123,6 @@ public class MusicPlayerController implements Initializable {
             for(Line.Info lineI:lineInfo){
                 Line line =null;
                 boolean open = true;
-
                 try{
                     line=mixer.getLine(lineI);
                     open=line.isOpen() || line instanceof Clip;
@@ -155,7 +153,6 @@ public class MusicPlayerController implements Initializable {
             for(Line.Info lineI:lineInfo){
                 Line line =null;
                 boolean open = true;
-
                 try{
                     line=mixer.getLine(lineI);
                     open=line.isOpen() || line instanceof Clip;
@@ -189,29 +186,23 @@ public class MusicPlayerController implements Initializable {
     void PlaylistChooser(ActionEvent event) throws FileNotFoundException {
         String selected = Playlist.getSelectionModel().getSelectedItem();
         PlayingPlaylist = selected;
-        LoadedPlaylist = FileInList.LoadFileOfStringsIntoDoublyLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
-        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
+        LoadedPlaylist = FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
+        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNextItem());
+        size = LoadedPlaylist.getSize();
     }
 
     @FXML
     void Loop(ActionEvent event) throws FileNotFoundException {
-        if(loop==true){
-            player.stop();
-            DoublyNode<String> ActualObserver = LoadedPlaylist.getObserver();
-            LoadedLoopPlaylist = FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
-            LoadedLoopPlaylist.ModifyObserver(ActualObserver);
+        if(loop==false){
+            //player.stop();
             System.out.println("pone loop");
-            loop = false;
+            loop = true;
             System.out.println(loop);
         }else{
-            player.stop();
-            DoublyNode<String> ActualObserver = LoadedLoopPlaylist.getObserver();
-            LoadedPlaylist.ModifyObserver(ActualObserver);
-            // DoublyLinkedList<String> LoadedPlaylist;
-            // LoadedPlaylist = FileInList.LoadFileOfStringsIntoDoublyLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
-            // song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
-            loop=true;
+           // song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
+            loop=false;
             System.out.println("quita loop");
+            System.out.println(loop);
         }
     }
 
