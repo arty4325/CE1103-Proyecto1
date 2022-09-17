@@ -36,6 +36,13 @@ public class DoublyLinkedList<T> {
         return node;
     }
 
+    public DoublyNode<T> getObserver(){
+        return observer;
+    }
+    public void ModifyObserver(DoublyNode<T> NewNode){
+        this.observer = NewNode;
+    }
+
 
     private DoublyNode<T> back(int position ){
         return getNode(position).getBack();

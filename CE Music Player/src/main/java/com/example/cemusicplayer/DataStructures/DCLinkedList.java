@@ -11,6 +11,9 @@ public class DCLinkedList<T> {
 
         this.size = 0;
     }
+    public void ModifyObserver(DoublyNode<T> NewNode){
+        this.observer = NewNode;
+    }
 
     public void add(T data){
         DoublyNode<T> NewNode = new DoublyNode<>(data);
@@ -70,7 +73,10 @@ public class DCLinkedList<T> {
         }
         this.size--;
     }
-    public T GetNextPosition(){
+    public DoublyNode<T> getObserver(){
+        return observer;
+    }
+    public T getNextItem(){
         DoublyNode<T>Temp = head;
         if(observer == head){
             observer = observer.getNext();
@@ -81,11 +87,12 @@ public class DCLinkedList<T> {
             observer =observer.getNext();
             return Temp.getData();
         } else {
-            return null;
+            observer = head;
+            return observer.getData();
         }
     }
 
-   public T GetBackPosition(){
+   public T getBackItem(){
        DoublyNode<T>Temp = head;
        if(observer == head){
            return null;

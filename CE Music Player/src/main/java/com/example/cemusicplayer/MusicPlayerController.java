@@ -2,6 +2,7 @@ package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.DCLinkedList;
 import com.example.cemusicplayer.DataStructures.DoublyLinkedList;
+import com.example.cemusicplayer.DataStructures.DoublyNode;
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
 import jaco.mp3.player.MP3Player;
@@ -42,29 +43,63 @@ public class MusicPlayerController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    DoublyLinkedList<String> LoadedPlaylist;
-    DCLinkedList<String> CircularLoadPLayList;
+    private DoublyLinkedList<String> LoadedPlaylist;
+    private DCLinkedList<String> LoadedLoopPlaylist;
+
     String PlayingPlaylist;
     MP3Player player = new MP3Player();
     File song; // = new File("MP3\\Slipknot - Snuff  Español.mp3");
     @FXML
     void LastSong(ActionEvent event) {
+<<<<<<< HEAD
         String ChoosedSong = LoadedPlaylist.getBack();
         song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
         player.addToPlayList(song);
         player.skipForward();
         music.setText(ChoosedSong);
         System.out.println(ChoosedSong);
+=======
+        if (loop==true){
+            String ChoosedSong = LoadedLoopPlaylist.getBackItem();
+            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+            player.addToPlayList(song);
+            player.skipForward();
+            System.out.println(ChoosedSong);
+        }else {
+            String ChoosedSong = LoadedPlaylist.getBack();
+            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+            player.addToPlayList(song);
+            player.skipForward();
+            System.out.println(ChoosedSong);
+        }
+>>>>>>> 56e1d34cda6f463016d2a74607db399ec1eab252
     }
 
     @FXML
     void NextSong(ActionEvent event) {
+<<<<<<< HEAD
         String ChoosedSong = LoadedPlaylist.getNext();
         song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
         player.addToPlayList(song);
         player.skipForward();
         music.setText(ChoosedSong);
         System.out.println(ChoosedSong);
+=======
+        if (loop==false){
+            String ChoosedSong = LoadedLoopPlaylist.getNextItem();
+            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+            player.addToPlayList(song);
+            player.skipForward();
+            System.out.println(ChoosedSong);
+            System.out.println("Loop Song");
+        } else {
+            String ChoosedSong = LoadedPlaylist.getNext();
+            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+            player.addToPlayList(song);
+            player.skipForward();
+            System.out.println(ChoosedSong);
+        }
+>>>>>>> 56e1d34cda6f463016d2a74607db399ec1eab252
     }
 
     @FXML
@@ -94,17 +129,13 @@ public class MusicPlayerController implements Initializable {
     }
 
     public void Pause(){
-
-
         if (c== true){
             player.pause();
             c=false;
         }else{
             player.play();
             c=true;
-
         }
-
     }
     public void volumeDown(Double d){
         Mixer.Info [] mixers= AudioSystem.getMixerInfo();
@@ -187,48 +218,22 @@ public class MusicPlayerController implements Initializable {
     void Loop(ActionEvent event) throws FileNotFoundException {
         if(loop==true){
             player.stop();
-            CircularLoadPLayList=FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
-            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + CircularLoadPLayList.GetNextPosition());
-
-            System.out.println("hola");
-            CircularNext.setVisible(true);
-            CircularBack.setVisible(true);
-            loop=false;
+            DoublyNode<String> ActualObserver = LoadedPlaylist.getObserver();
+            LoadedLoopPlaylist = FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
+            LoadedLoopPlaylist.ModifyObserver(ActualObserver);
+            System.out.println("pone loop");
+            loop = false;
             System.out.println(loop);
-
-
         }else{
             player.stop();
-
-            LoadedPlaylist = FileInList.LoadFileOfStringsIntoDoublyLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
-            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
+            DoublyNode<String> ActualObserver = LoadedLoopPlaylist.getObserver();
+            LoadedPlaylist.ModifyObserver(ActualObserver);
+            // DoublyLinkedList<String> LoadedPlaylist;
+            // LoadedPlaylist = FileInList.LoadFileOfStringsIntoDoublyLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
+            // song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
             loop=true;
-            System.out.println("holas");
-            CircularNext.setVisible(false);
-            CircularBack.setVisible(false);
-
-
+            System.out.println("quita loop");
         }
-
-
-    }
-
-    @FXML
-    void CircularLastSong(ActionEvent event) {
-        String ChoosedSong = CircularLoadPLayList.GetBackPosition();
-        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
-        player.addToPlayList(song);
-        player.skipForward();
-        System.out.println(ChoosedSong);
-    }
-
-    @FXML
-    void CircularNextSong(ActionEvent event) {
-        String ChoosedSong = CircularLoadPLayList.GetNextPosition();
-        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
-        player.addToPlayList(song);
-        player.skipForward();
-        System.out.println(ChoosedSong);
     }
 
     @Override
