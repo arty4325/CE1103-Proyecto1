@@ -29,6 +29,7 @@ public class SignUpController implements Initializable {
     @FXML
     private ComboBox<String> Provincias;
 
+
     @FXML
     private TextField email;
 

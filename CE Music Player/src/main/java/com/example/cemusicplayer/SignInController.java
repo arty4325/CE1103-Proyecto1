@@ -2,6 +2,7 @@ package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
+import com.example.cemusicplayer.MusicManager.XMLController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +66,10 @@ public class SignInController {
             LinkedList<String> AccoutInformation = new LinkedList<>();
             AccoutInformation = FileInList.LoadFileOfStringsIntoList(InfoFile);
             if(Password.equals(AccoutInformation.get(3) )){
+
                 Parent root = null;
+                XMLController.readxml();
+
                 try {
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
                 } catch (IOException e) {
@@ -79,6 +83,7 @@ public class SignInController {
             }else if(PasswordEntry.getText() == ""){
                 if(Passwords.equals(AccoutInformation.get(3) )){
                     Parent root = null;
+
                     try {
                         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
                     } catch (IOException e) {

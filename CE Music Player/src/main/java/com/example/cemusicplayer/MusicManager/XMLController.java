@@ -1,14 +1,34 @@
 package com.example.cemusicplayer.MusicManager;
 
+import com.example.cemusicplayer.DataStructures.DCLinkedList;
+import com.example.cemusicplayer.SignInController;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 
+import org.jdom2.output.XMLOutputter;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+import java.util.logging.*;
+
+
+
+
 
 public class XMLController {
+
+    private static String PlayingPlaylist;
 
     public static void creator(Boolean value, String Song, String Genre, String Artist, String Album, String Year, String Lyrics, String Path) throws IOException {
         Element PlaylistMetadata = new Element("Metadata");
@@ -44,6 +64,40 @@ public class XMLController {
         xml.setFormat(Format.getPrettyFormat()); //  para que no esten todas las lineas juntas
         xml.output(doc, new FileWriter(Path));
     }
+    public static void readxml(){
+        String FILENAME= "C:\\Datos1\\Practicas\\CE1103-Proyecto1\\Users\\prueba\\The Dark Side Of The Moon\\Any Colour You Like.mp3.xml";
+        try{
+            SAXBuilder sax = new SAXBuilder();
+
+
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+
+            Document doc = sax.build(new File(FILENAME));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("Songs");
+
+            for (Element target : list) {
+
+                String name = target.getChildText("Genero");
+                String Artist = target.getChildText("Artist");
+                String Album = target.getChildText("Album");
+                String Year = target.getChildText("Year");
+
+                System.out.println(name+Artist+Album+Year);
+
+
+            }
+    } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JDOMException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 
 }

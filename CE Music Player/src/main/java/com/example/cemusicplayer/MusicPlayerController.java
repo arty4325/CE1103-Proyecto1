@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.sound.sampled.*;
@@ -32,8 +33,10 @@ public class MusicPlayerController implements Initializable {
     @FXML
     private Button CircularNext;
 
+
+
     @FXML
-    private Button CircularBack;
+    private Label label;
     boolean c=true;
     boolean loop=true;
 
@@ -48,7 +51,7 @@ public class MusicPlayerController implements Initializable {
     File song; // = new File("MP3\\Slipknot - Snuff  Español.mp3");
     @FXML
     void LastSong(ActionEvent event) {
-        if (loop==true){
+        if (loop==false){
             String ChoosedSong = LoadedLoopPlaylist.getBackItem();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
