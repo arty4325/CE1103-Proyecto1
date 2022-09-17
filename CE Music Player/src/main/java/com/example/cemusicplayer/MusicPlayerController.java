@@ -56,6 +56,7 @@ public class MusicPlayerController implements Initializable {
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
+            label.setText(ChoosedSong);
             System.out.println(ChoosedSong);
             System.out.println("Button Is pressed");
         }else {
@@ -63,6 +64,7 @@ public class MusicPlayerController implements Initializable {
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
+            label.setText(ChoosedSong);
             System.out.println(ChoosedSong);
         }
     }
@@ -74,6 +76,7 @@ public class MusicPlayerController implements Initializable {
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
+            label.setText(ChoosedSong);
             System.out.println(ChoosedSong);
             System.out.println("Loop Song");
         } else {
@@ -81,6 +84,7 @@ public class MusicPlayerController implements Initializable {
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
+            label.setText(ChoosedSong);
             System.out.println(ChoosedSong);
         }
     }
@@ -105,7 +109,9 @@ public class MusicPlayerController implements Initializable {
     }
 
     public void play() {
+
         System.out.println(PlayingPlaylist);
+        
         player.addToPlayList(song);
         player.play();
     }
