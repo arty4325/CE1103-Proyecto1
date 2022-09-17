@@ -54,6 +54,7 @@ public class MusicPlayerController implements Initializable {
             player.addToPlayList(song);
             player.skipForward();
             System.out.println(ChoosedSong);
+            System.out.println("Button Is pressed");
         }else {
             String ChoosedSong = LoadedPlaylist.getBack();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
