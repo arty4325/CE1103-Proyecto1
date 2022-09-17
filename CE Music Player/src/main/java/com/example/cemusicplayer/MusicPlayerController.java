@@ -1,5 +1,6 @@
 package com.example.cemusicplayer;
 
+import com.example.cemusicplayer.DataStructures.DCLinkedList;
 import com.example.cemusicplayer.DataStructures.DoublyLinkedList;
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
@@ -25,12 +27,20 @@ import java.util.ResourceBundle;
 public class MusicPlayerController implements Initializable {
     @FXML
     private ComboBox<String> Playlist;
+
+    @FXML
+    private Button CircularNext;
+
+    @FXML
+    private Button CircularBack;
     boolean c=true;
+    boolean loop=true;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
     DoublyLinkedList<String> LoadedPlaylist;
+    DCLinkedList<String> CircularLoadPLayList;
     String PlayingPlaylist;
     MP3Player player = new MP3Player();
     File song; // = new File("MP3\\Slipknot - Snuff  Español.mp3");
@@ -165,6 +175,54 @@ public class MusicPlayerController implements Initializable {
         PlayingPlaylist = selected;
         LoadedPlaylist = FileInList.LoadFileOfStringsIntoDoublyLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
         song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
+    }
+
+    @FXML
+    void Loop(ActionEvent event) throws FileNotFoundException {
+        if(loop==true){
+            player.stop();
+            CircularLoadPLayList=FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
+            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + CircularLoadPLayList.GetNextPosition());
+
+            System.out.println("hola");
+            CircularNext.setVisible(true);
+            CircularBack.setVisible(true);
+            loop=false;
+            System.out.println(loop);
+
+
+        }else{
+            player.stop();
+
+            LoadedPlaylist = FileInList.LoadFileOfStringsIntoDoublyLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
+            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
+            loop=true;
+            System.out.println("holas");
+            CircularNext.setVisible(false);
+            CircularBack.setVisible(false);
+
+
+        }
+
+
+    }
+
+    @FXML
+    void CircularLastSong(ActionEvent event) {
+        String ChoosedSong = CircularLoadPLayList.GetBackPosition();
+        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+        player.addToPlayList(song);
+        player.skipForward();
+        System.out.println(ChoosedSong);
+    }
+
+    @FXML
+    void CircularNextSong(ActionEvent event) {
+        String ChoosedSong = CircularLoadPLayList.GetNextPosition();
+        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+        player.addToPlayList(song);
+        player.skipForward();
+        System.out.println(ChoosedSong);
     }
 
     @Override

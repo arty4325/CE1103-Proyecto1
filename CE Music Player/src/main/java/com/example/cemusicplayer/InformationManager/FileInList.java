@@ -1,5 +1,6 @@
 package com.example.cemusicplayer.InformationManager;
 
+import com.example.cemusicplayer.DataStructures.DCLinkedList;
 import com.example.cemusicplayer.DataStructures.DoublyLinkedList;
 import com.example.cemusicplayer.DataStructures.LinkedList;
 
@@ -18,6 +19,14 @@ public class FileInList {
     }
     public static DoublyLinkedList<String> LoadFileOfStringsIntoDoublyLinkedList(File file) throws FileNotFoundException {
         DoublyLinkedList<String> list = new DoublyLinkedList<>();
+        Scanner scan = new Scanner(file);
+        while(scan.hasNextLine()){
+            list.add(scan.nextLine());
+        }
+        return list;
+    }
+    public static DCLinkedList<String> LoadFileOfStringsIntoDCLinkedList(File file) throws FileNotFoundException {
+        DCLinkedList<String> list = new DCLinkedList<>();
         Scanner scan = new Scanner(file);
         while(scan.hasNextLine()){
             list.add(scan.nextLine());

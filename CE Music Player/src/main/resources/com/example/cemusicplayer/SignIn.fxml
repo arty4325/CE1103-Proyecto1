@@ -17,6 +17,6 @@
       <Button fx:id="UserSignIn" layoutX="432.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#SignInPlatfom" text="Start" />
       <PasswordField fx:id="PasswordEntry" layoutX="210.0" layoutY="243.0" prefHeight="26.0" prefWidth="214.0" />
       <CheckBox fx:id="checkBox" layoutX="443.0" layoutY="247.0" mnemonicParsing="false" onAction="#seePassword" text="ver contraseña" />
-      <TextField fx:id="Passwords" layoutX="210.0" layoutY="243.0" prefHeight="26.0" prefWidth="214.0" visible="false" />
+      <TextField fx:id="passwordsEntry" layoutX="210.0" layoutY="243.0" prefHeight="26.0" prefWidth="214.0" visible="false" />
    </children>
 </AnchorPane>

@@ -88,7 +88,7 @@ public class DoublyLinkedList<T> {
         }
     }
     public T getBack(){
-        DoublyNode<T>Temp = first;
+        DoublyNode<T> Temp = first;
         if(observer == first){
             return null;
         } else if (observer != null) {

@@ -32,13 +32,14 @@ public class SignInController {
     @FXML
     private PasswordField PasswordEntry;
     @FXML
-    private TextField Passwords;
+    private TextField passwordsEntry;
     @FXML
     private CheckBox checkBox;
     @FXML
     private Button UserSignIn;
     public static String Email;
     private String Password;
+    private String Passwords;
 
     public static String getEmail() {
         return Email;
@@ -56,13 +57,14 @@ public class SignInController {
     void SignInPlatfom(MouseEvent event) throws FileNotFoundException {
         Email = EmailEntry.getText();
         Password = PasswordEntry.getText();
+        Passwords = passwordsEntry.getText();
         File Dir = new File("Users/" + Email);
         if (Dir.exists()){
             // Se revisa el archivo .txt que esta dentro del directorio
             File InfoFile = new File("Users/" + Email + "/UserInformation.txt");
             LinkedList<String> AccoutInformation = new LinkedList<>();
             AccoutInformation = FileInList.LoadFileOfStringsIntoList(InfoFile);
-            if(Password.equals(AccoutInformation.get(3))){
+            if(Password.equals(AccoutInformation.get(3) )){
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
@@ -81,14 +83,15 @@ public class SignInController {
     }
     public void seePassword(ActionEvent event){
         if (checkBox.isSelected()){
-            Passwords.setText(PasswordEntry.getText());
-            Passwords.setVisible(true);
+            passwordsEntry.setText(PasswordEntry.getText());
+            passwordsEntry.setVisible(true);
             PasswordEntry.setVisible(false);
 
+
         }else{
-            PasswordEntry.setText(Passwords.getText());
+            PasswordEntry.setText(passwordsEntry.getText());
             PasswordEntry.setVisible(true);
-            Passwords.setVisible(false);
+            passwordsEntry.setVisible(false);
         }
     }
 
