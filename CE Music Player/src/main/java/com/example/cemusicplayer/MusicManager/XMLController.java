@@ -1,10 +1,14 @@
 package com.example.cemusicplayer.MusicManager;
 
+import com.example.cemusicplayer.DataStructures.DCLinkedList;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -44,6 +48,15 @@ public class XMLController {
         xml.setFormat(Format.getPrettyFormat()); //  para que no esten todas las lineas juntas
         xml.output(doc, new FileWriter(Path));
     }
+
+    public void read() throws IOException, JDOMException {
+        SAXBuilder builer=new SAXBuilder();
+        File xml = new File("Any Colour You Like.mp3.xml");
+        Document document = builer.build(xml);
+        Element root = document.getRootElement();
+        DCLinkedList<String>=root
+    }
+
 
 
 }

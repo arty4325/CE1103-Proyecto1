@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.sound.sampled.*;
@@ -33,6 +34,8 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     private Button CircularBack;
+    @FXML
+    private Label music;
     boolean c=true;
     boolean loop=true;
 
@@ -50,6 +53,7 @@ public class MusicPlayerController implements Initializable {
         song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
         player.addToPlayList(song);
         player.skipForward();
+        music.setText(ChoosedSong);
         System.out.println(ChoosedSong);
     }
 
@@ -59,6 +63,7 @@ public class MusicPlayerController implements Initializable {
         song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
         player.addToPlayList(song);
         player.skipForward();
+        music.setText(ChoosedSong);
         System.out.println(ChoosedSong);
     }
 
@@ -84,6 +89,7 @@ public class MusicPlayerController implements Initializable {
     public void play() {
         System.out.println(PlayingPlaylist);
         player.addToPlayList(song);
+
         player.play();
     }
 
