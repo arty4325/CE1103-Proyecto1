@@ -15,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.sound.sampled.*;
@@ -35,8 +34,6 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     private Button CircularBack;
-    @FXML
-    private Label music;
     boolean c=true;
     boolean loop=true;
 
@@ -51,20 +48,13 @@ public class MusicPlayerController implements Initializable {
     File song; // = new File("MP3\\Slipknot - Snuff  Español.mp3");
     @FXML
     void LastSong(ActionEvent event) {
-<<<<<<< HEAD
-        String ChoosedSong = LoadedPlaylist.getBack();
-        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
-        player.addToPlayList(song);
-        player.skipForward();
-        music.setText(ChoosedSong);
-        System.out.println(ChoosedSong);
-=======
         if (loop==true){
             String ChoosedSong = LoadedLoopPlaylist.getBackItem();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
             System.out.println(ChoosedSong);
+            System.out.println("Button Is pressed");
         }else {
             String ChoosedSong = LoadedPlaylist.getBack();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
@@ -72,19 +62,10 @@ public class MusicPlayerController implements Initializable {
             player.skipForward();
             System.out.println(ChoosedSong);
         }
->>>>>>> 56e1d34cda6f463016d2a74607db399ec1eab252
     }
 
     @FXML
     void NextSong(ActionEvent event) {
-<<<<<<< HEAD
-        String ChoosedSong = LoadedPlaylist.getNext();
-        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
-        player.addToPlayList(song);
-        player.skipForward();
-        music.setText(ChoosedSong);
-        System.out.println(ChoosedSong);
-=======
         if (loop==false){
             String ChoosedSong = LoadedLoopPlaylist.getNextItem();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
@@ -99,7 +80,6 @@ public class MusicPlayerController implements Initializable {
             player.skipForward();
             System.out.println(ChoosedSong);
         }
->>>>>>> 56e1d34cda6f463016d2a74607db399ec1eab252
     }
 
     @FXML
@@ -124,7 +104,6 @@ public class MusicPlayerController implements Initializable {
     public void play() {
         System.out.println(PlayingPlaylist);
         player.addToPlayList(song);
-
         player.play();
     }
 
