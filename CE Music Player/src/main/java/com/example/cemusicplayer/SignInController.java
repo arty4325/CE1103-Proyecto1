@@ -76,9 +76,29 @@ public class SignInController {
                 stage.setScene(scene);
                 stage.show();
                 System.out.println("Contra Correcta");
-            } else {
+            }else if(PasswordEntry.getText() == ""){
+                if(Passwords.equals(AccoutInformation.get(3) )){
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                    System.out.println("Contra Correcta");
+
+
+                }else {
+                    System.out.println("Contra Incorrecta");
+                }
+
+            }else {
                 System.out.println("Contra Incorrecta");
             }
+
         }
     }
     public void seePassword(ActionEvent event){
