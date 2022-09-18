@@ -1,8 +1,6 @@
 package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.DCLinkedList;
-import com.example.cemusicplayer.DataStructures.DoublyLinkedList;
-import com.example.cemusicplayer.DataStructures.DoublyNode;
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
 import jaco.mp3.player.MP3Player;
@@ -16,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-
+import javafx.scene.control.Label;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,6 +32,8 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     private Button CircularBack;
+    @FXML
+    private Label label;
     boolean c = true;
     boolean loop = false;
     private Stage stage;
@@ -54,12 +54,15 @@ public class MusicPlayerController implements Initializable {
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
+            label.setText(ChoosedSong);
             System.out.println(ChoosedSong);
         }else if (loop == true){
             String ChoosedSong = LoadedPlaylist.getBackItem();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
+            label.setText(ChoosedSong);
+            label.setText(ChoosedSong);
             System.out.println(ChoosedSong);
         }
     }
@@ -73,12 +76,14 @@ public class MusicPlayerController implements Initializable {
             player.addToPlayList(song);
             player.skipForward();
             System.out.println(ChoosedSong);
+            label.setText(ChoosedSong);
             System.out.println("Loop Song");
         } else if (loop){
             String ChoosedSong = LoadedPlaylist.getNextItem();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
+            label.setText(ChoosedSong);
             System.out.println(ChoosedSong);
         }
     }
