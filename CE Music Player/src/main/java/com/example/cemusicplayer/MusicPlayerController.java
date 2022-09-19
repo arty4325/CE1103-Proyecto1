@@ -3,6 +3,7 @@ package com.example.cemusicplayer;
 import com.example.cemusicplayer.DataStructures.DCLinkedList;
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
+import com.example.cemusicplayer.MusicManager.XMLController;
 import jaco.mp3.player.MP3Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +35,21 @@ public class MusicPlayerController implements Initializable {
     private Button CircularBack;
     @FXML
     private Label label;
+
+    @FXML
+    private Label Genero;
+
+    @FXML
+    private Label Album;
+
+    @FXML
+    private Label Year;
+
+    @FXML
+    private Label Artist;
+
+    @FXML
+    private Label Lyrics;
     boolean c = true;
     boolean loop = false;
     private Stage stage;
@@ -46,23 +62,38 @@ public class MusicPlayerController implements Initializable {
     String PlayingPlaylist;
     MP3Player player = new MP3Player();
     File song;
+
+    File Metadata;
     @FXML
     void LastSong(ActionEvent event) {
         if (loop == false){
             String ChoosedSong = LoadedPlaylist.getBackItemNotLoop();
-            System.out.println(LoadedPlaylist.getSize());
+            label.setText(ChoosedSong);
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
+            Genero.setText(XMLController.GetGenero(Metadata));
+            Artist.setText(XMLController.GetArtist(Metadata));
+            Album.setText(XMLController.GetAlbum(Metadata));
+            Year.setText(XMLController.GetYear(Metadata));
+            Lyrics.setText(XMLController.GetLyrics(Metadata));
             player.addToPlayList(song);
             player.skipForward();
-            label.setText(ChoosedSong);
+
             System.out.println(ChoosedSong);
         }else if (loop == true){
             String ChoosedSong = LoadedPlaylist.getBackItem();
+            label.setText(ChoosedSong);
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
+            Genero.setText(XMLController.GetGenero(Metadata));
+            Artist.setText(XMLController.GetArtist(Metadata));
+            Album.setText(XMLController.GetAlbum(Metadata));
+            Year.setText(XMLController.GetYear(Metadata));
+            Lyrics.setText(XMLController.GetLyrics(Metadata));
             player.addToPlayList(song);
             player.skipForward();
-            label.setText(ChoosedSong);
-            label.setText(ChoosedSong);
+
+
             System.out.println(ChoosedSong);
         }
     }
@@ -73,6 +104,12 @@ public class MusicPlayerController implements Initializable {
 
             String ChoosedSong = LoadedPlaylist.getNextItemNotLoop();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
+            Genero.setText(XMLController.GetGenero(Metadata));
+            Artist.setText(XMLController.GetArtist(Metadata));
+            Album.setText(XMLController.GetAlbum(Metadata));
+            Year.setText(XMLController.GetYear(Metadata));
+            Lyrics.setText(XMLController.GetLyrics(Metadata));
             player.addToPlayList(song);
             player.skipForward();
             System.out.println(ChoosedSong);
@@ -81,6 +118,12 @@ public class MusicPlayerController implements Initializable {
         } else if (loop){
             String ChoosedSong = LoadedPlaylist.getNextItem();
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
+            Genero.setText(XMLController.GetGenero(Metadata));
+            Artist.setText(XMLController.GetArtist(Metadata));
+            Album.setText(XMLController.GetAlbum(Metadata));
+            Year.setText(XMLController.GetYear(Metadata));
+            Lyrics.setText(XMLController.GetLyrics(Metadata));
             player.addToPlayList(song);
             player.skipForward();
             label.setText(ChoosedSong);

@@ -55,8 +55,12 @@ public class XMLController {
         xml.setFormat(Format.getPrettyFormat()); //  para que no esten todas las lineas juntas
         xml.output(doc, new FileWriter(Path));
     }
-    public static void readxml(){
-        String FILENAME= "Users/prueba/The Dark Side Of The Moon/Any Colour You Like.mp3.xml";
+    public static String GetGenero(File FILENAME){
+        String name="";
+
+        String data= String.valueOf(FILENAME);
+
+
         try{
             SAXBuilder sax = new SAXBuilder();
 
@@ -65,22 +69,186 @@ public class XMLController {
             sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
 
-            Document doc = sax.build(new File(FILENAME));
+            Document doc = sax.build(new File(data));
 
             Element rootNode = doc.getRootElement();
             List<Element> list = rootNode.getChildren("Songs");
 
             for (Element target : list) {
 
-                String name = target.getChildText("Genero");
-                String Artist = target.getChildText("Artist");
-                String Album = target.getChildText("Album");
-                String Year = target.getChildText("Year");
+                name = target.getChildText("Genero");
 
-                System.out.println(name+Artist+Album+Year);
+
+
 
 
             }
+
+            return name;
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JDOMException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public static String GetArtist(File FILENAME){
+
+        String Artist="";
+        String data= String.valueOf(FILENAME);
+
+
+        try{
+            SAXBuilder sax = new SAXBuilder();
+
+
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+
+            Document doc = sax.build(new File(data));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("Songs");
+
+            for (Element target : list) {
+
+
+                Artist = target.getChildText("Artist");
+
+
+
+
+
+            }
+
+            return Artist;
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JDOMException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static String GetAlbum(File FILENAME){
+
+        String Album="";
+        String data= String.valueOf(FILENAME);
+
+
+        try{
+            SAXBuilder sax = new SAXBuilder();
+
+
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+
+            Document doc = sax.build(new File(data));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("Songs");
+
+            for (Element target : list) {
+
+
+                Album = target.getChildText("Album");
+
+
+
+
+
+            }
+
+            return Album;
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JDOMException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public static String GetYear(File FILENAME){
+
+        String Year="";
+        String data= String.valueOf(FILENAME);
+
+
+        try{
+            SAXBuilder sax = new SAXBuilder();
+
+
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+
+            Document doc = sax.build(new File(data));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("Songs");
+
+            for (Element target : list) {
+
+
+                Year = target.getChildText("Year");
+
+
+
+
+
+            }
+
+            return Year;
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JDOMException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static String GetLyrics(File FILENAME){
+
+        String Lyrics="";
+        String data= String.valueOf(FILENAME);
+
+
+        try{
+            SAXBuilder sax = new SAXBuilder();
+
+
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+
+            Document doc = sax.build(new File(data));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("Songs");
+
+            for (Element target : list) {
+
+
+                Lyrics = target.getChildText("Lyrics");
+
+
+
+
+
+            }
+
+            return Lyrics;
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (JDOMException e) {
