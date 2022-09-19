@@ -94,15 +94,14 @@ public class DCLinkedList<T> {
     public T getNextItemNotLoop(){
         DoublyNode<T>Temp = head;
         if(observer == head){
-            return null;
+            return getData(size - 1);
         }
         else if (observer != null){
             Temp = observer;
-            observer =observer.getNext();
+            observer = observer.getNext();
             return Temp.getData();
         } else {
-            observer = head;
-            return observer.getData();
+            return null;
         }
     }
 
@@ -122,12 +121,15 @@ public class DCLinkedList<T> {
    }
     public T getBackItemNotLoop(){
         DoublyNode<T>Temp = head;
-        if (observer != getNode(0)) {
-            Temp = observer;
+        if ((observer != getNode(0)) && (observer != getNode(1))) {
             observer = observer.getBack();
-            return Temp.getData();
+            return observer.getData();
+        }  else if (observer == getNode(1)){
+            observer = observer.getBack();
+            return getData(0);
         } else {
-            return null;
+            observer.getBack();
+            return observer.getData();
         }
     }
 

@@ -76,6 +76,7 @@ public class MusicPlayerController implements Initializable {
             Album.setText(XMLController.GetAlbum(Metadata));
             Year.setText(XMLController.GetYear(Metadata));
             Lyrics.setText(XMLController.GetLyrics(Metadata));
+
             player.addToPlayList(song);
             player.skipForward();
 
