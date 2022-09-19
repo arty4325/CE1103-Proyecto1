@@ -148,7 +148,15 @@ public class MusicPlayerController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    @FXML
+    void Edit(ActionEvent event) throws IOException {
+        player.stop();
+        Parent root = FXMLLoader.load(getClass().getResource("EditMetadata.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void play() {
         System.out.println(PlayingPlaylist);
         player.addToPlayList(song);
