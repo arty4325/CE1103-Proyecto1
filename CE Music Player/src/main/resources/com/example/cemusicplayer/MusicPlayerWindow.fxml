@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.MusicPlayerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.MusicPlayerController">
    <children>
       <Button layoutX="397.0" layoutY="137.0" mnemonicParsing="false" onAction="#play" text="Play" />
       <Button layoutX="495.0" layoutY="137.0" mnemonicParsing="false" onAction="#Pause" text="Pause" />
@@ -24,6 +24,7 @@
       <Label fx:id="Artist" layoutX="18.0" layoutY="225.0" prefHeight="18.0" prefWidth="196.0" text="Label" />
       <Label fx:id="Year" layoutX="18.0" layoutY="243.0" prefHeight="18.0" prefWidth="214.0" text="Label" />
       <Label fx:id="Lyrics" layoutX="17.0" layoutY="261.0" prefHeight="18.0" prefWidth="186.0" text="Label" />
-      <Button layoutX="15.0" layoutY="95.0" mnemonicParsing="false" onAction="#Edit" prefHeight="26.0" prefWidth="126.0" text="Editar Metadata" />
+      <Button layoutX="14.0" layoutY="125.0" mnemonicParsing="false" onAction="#Edit" prefHeight="26.0" prefWidth="126.0" text="Editar Metadata" />
+      <Button layoutX="14.0" layoutY="90.0" mnemonicParsing="false" onAction="#DeleteMusic" text="Delete Music" />
    </children>
 </AnchorPane>
