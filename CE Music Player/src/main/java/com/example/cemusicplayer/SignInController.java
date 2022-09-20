@@ -2,7 +2,6 @@ package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -54,7 +52,7 @@ public class SignInController {
     }
 
     @FXML
-    void SignInPlatfom(MouseEvent event) throws FileNotFoundException {
+    void SignInPlatfom(MouseEvent event) throws IOException {
         Email = EmailEntry.getText();
         Password = PasswordEntry.getText();
         Passwords = passwordsEntry.getText();
@@ -64,13 +62,10 @@ public class SignInController {
             File InfoFile = new File("Users/" + Email + "/UserInformation.txt");
             LinkedList<String> AccoutInformation = new LinkedList<>();
             AccoutInformation = FileInList.LoadFileOfStringsIntoList(InfoFile);
+            System.out.println(AccoutInformation.get(3));
+            //System.out.println(Password);
             if(Password.equals(AccoutInformation.get(3) )){
-                Parent root = null;
-                try {
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Parent root = root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
                 stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -78,19 +73,12 @@ public class SignInController {
                 System.out.println("Contra Correcta");
             }else if(PasswordEntry.getText() == ""){
                 if(Passwords.equals(AccoutInformation.get(3) )){
-                    Parent root = null;
-                    try {
-                        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Parent root = root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
                     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
                     System.out.println("Contra Correcta");
-
-
                 }else {
                     System.out.println("Contra Incorrecta");
                 }
@@ -106,8 +94,6 @@ public class SignInController {
             passwordsEntry.setText(PasswordEntry.getText());
             passwordsEntry.setVisible(true);
             PasswordEntry.setVisible(false);
-
-
         }else{
             PasswordEntry.setText(passwordsEntry.getText());
             PasswordEntry.setVisible(true);

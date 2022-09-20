@@ -84,6 +84,20 @@ public class LinkedList<T> {
         this.size--;
         return FinalNode.getData();
     }
+    public int IndexOfItem(String Item){
+        SimpleNode<T> Checker = head;
+        int Value = 0;
+        for (int i = 0; i < size; i++){
+
+            if (get(i) == Item){
+                System.out.println("Es Igual");
+                Value = i;
+            }
+        }
+        this.size--;
+        System.out.println("End Of Loop");
+        return Value;
+    }
 
 
 

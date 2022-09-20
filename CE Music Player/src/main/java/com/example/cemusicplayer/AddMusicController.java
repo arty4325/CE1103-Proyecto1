@@ -71,9 +71,7 @@ public class AddMusicController implements Initializable {
         LoadedSongsFileWriter.close();
 
 
-        boolean exists = xmlFile.exists();
-        System.out.println(exists);
-        XMLController.creator(exists,
+        XMLController.creator(
                 NameOfSong,
                 NameOfGenre,
                 NameOfArtist,

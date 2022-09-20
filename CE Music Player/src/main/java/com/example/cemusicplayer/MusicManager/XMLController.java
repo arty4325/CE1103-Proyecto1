@@ -21,7 +21,7 @@ public class XMLController {
 
     private static String PlayingPlaylist;
 
-    public static void creator(Boolean value, String Song, String Genre, String Artist, String Album, String Year, String Lyrics, String Path) throws IOException {
+    public static void creator(String Song, String Genre, String Artist, String Album, String Year, String Lyrics, String Path) throws IOException {
         Element PlaylistMetadata = new Element("Metadata");
         Document doc = new Document(PlaylistMetadata);
 

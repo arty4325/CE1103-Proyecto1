@@ -17,6 +17,8 @@ public class SignUpUser {
             //file.close();
             Dir.mkdirs();
             File InfoFile = new File("Users/" + Email  + "/UserInformation.txt");
+            File Playlist = new File("Users/" + Email  + "/ExistingPlaylist.txt");
+            Playlist.createNewFile();
             FileWriter InfoFileWriter = new FileWriter(InfoFile, true);
             BufferedWriter InfoFilebw = new BufferedWriter(InfoFileWriter);
             InfoFilebw.write(Email);
