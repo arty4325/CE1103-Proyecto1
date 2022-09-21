@@ -28,11 +28,7 @@ public class MusicPlayerController implements Initializable {
     @FXML
     private ComboBox<String> Playlist;
 
-    @FXML
-    private Button CircularNext;
 
-    @FXML
-    private Button CircularBack;
     @FXML
     private Label label;
 
@@ -46,6 +42,9 @@ public class MusicPlayerController implements Initializable {
     private Label Year;
 
     @FXML
+    private Button favorite;
+
+    @FXML
     private Label Artist;
 
     @FXML
@@ -56,18 +55,20 @@ public class MusicPlayerController implements Initializable {
     private Scene scene;
     private Parent root;
     private DCLinkedList<String> LoadedPlaylist;
-    private DCLinkedList<String> LoadedLoopPlaylist;
+
     private int size;
 
-    String PlayingPlaylist;
+    static String PlayingPlaylist;
     MP3Player player = new MP3Player();
-    File song;
-
+    static File song;
+    static String ChoosedSong;
     File Metadata;
+
+
     @FXML
     void LastSong(ActionEvent event) {
         if (loop == false){
-            String ChoosedSong = LoadedPlaylist.getBackItemNotLoop();
+            ChoosedSong = LoadedPlaylist.getBackItemNotLoop();
             label.setText(ChoosedSong);
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
@@ -269,6 +270,17 @@ public class MusicPlayerController implements Initializable {
             System.out.println("quita loop");
             System.out.println(loop);
         }
+    }
+
+    @FXML
+    void Favorite(ActionEvent event) throws IOException {
+        player.stop();
+        Parent root = FXMLLoader.load(getClass().getResource("AddFavorite.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     @Override
