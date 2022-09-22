@@ -28,5 +28,7 @@
       <Button layoutX="14.0" layoutY="90.0" mnemonicParsing="false" onAction="#DeleteMusic" text="Delete Music" />
       <Button fx:id="favorite" layoutX="17.0" layoutY="163.0" mnemonicParsing="false" onAction="#Favorite" prefHeight="26.0" prefWidth="126.0" text="Agregar a Favoritos" />
       <Label fx:id="Favorite" layoutX="325.0" layoutY="201.0" text="Favorita" visible="false" />
+      <Button layoutX="467.0" layoutY="323.0" mnemonicParsing="false" onAction="#AddFavorite" text="Agregar cancion actual Favortos" />
+      <Button layoutX="131.0" layoutY="14.0" mnemonicParsing="false" onAction="#DeletePlaylist" text="Eliminar Playlist" />
    </children>
 </AnchorPane>

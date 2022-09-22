@@ -17,9 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javax.sound.sampled.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -279,6 +277,7 @@ public class MusicPlayerController implements Initializable {
             if (lineFromFile.contains(cancion)) {
                 F=true;
                 Favorite.setVisible(F);
+
                 break;
 
             }else{
@@ -291,6 +290,24 @@ public class MusicPlayerController implements Initializable {
 
 
         return null;
+    }
+
+    @FXML
+    void AddFavorite(ActionEvent event) throws IOException {
+        String Email = SignInController.getEmail();
+
+
+        System.out.println(label);
+
+        File LoadedSongs = new File("Users/" + Email + "/" + "/FavoriteSongs.txt");
+        FileWriter LoadedSongsFileWriter = new FileWriter(LoadedSongs, true);
+        BufferedWriter Songsbw = new BufferedWriter(LoadedSongsFileWriter);
+
+        Songsbw.write(String.valueOf(label));
+        Songsbw.newLine();
+        Songsbw.close();
+        LoadedSongsFileWriter.close();
+        SearchFavorite(String.valueOf(label));
     }
 
         @FXML
@@ -316,6 +333,16 @@ public class MusicPlayerController implements Initializable {
             System.out.println("quita loop");
             System.out.println(loop);
         }
+    }
+    @FXML
+    void DeletePlaylist(ActionEvent event) throws IOException {
+        player.stop();
+        Parent root = FXMLLoader.load(getClass().getResource("DeletePlaylist.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     @FXML

@@ -78,6 +78,7 @@ public class AddFavoriteController implements Initializable {
         String Email = SignInController.getEmail();
 
         NameOfSong = ChoosedSong;
+
         DestPLaylist=ChoosedPlaylist;
         System.out.println(NameOfSong);
 
