@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 
 public class MusicPlayerController implements Initializable {
@@ -54,7 +55,14 @@ public class MusicPlayerController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    @FXML
+    private Label Favorite;
     private DCLinkedList<String> LoadedPlaylist;
+
+    private DCLinkedList<String> FavoriteSongs;
+
+    boolean F;
 
     private int size;
 
@@ -66,7 +74,7 @@ public class MusicPlayerController implements Initializable {
 
 
     @FXML
-    void LastSong(ActionEvent event) {
+    void LastSong(ActionEvent event) throws FileNotFoundException {
         if (loop == false){
             ChoosedSong = LoadedPlaylist.getBackItemNotLoop();
             label.setText(ChoosedSong);
@@ -77,6 +85,7 @@ public class MusicPlayerController implements Initializable {
             Album.setText(XMLController.GetAlbum(Metadata));
             Year.setText(XMLController.GetYear(Metadata));
             Lyrics.setText(XMLController.GetLyrics(Metadata));
+            SearchFavorite(ChoosedSong);
 
             player.addToPlayList(song);
             player.skipForward();
@@ -92,6 +101,9 @@ public class MusicPlayerController implements Initializable {
             Album.setText(XMLController.GetAlbum(Metadata));
             Year.setText(XMLController.GetYear(Metadata));
             Lyrics.setText(XMLController.GetLyrics(Metadata));
+
+            SearchFavorite(ChoosedSong);
+
             player.addToPlayList(song);
             player.skipForward();
 
@@ -105,6 +117,7 @@ public class MusicPlayerController implements Initializable {
         if (!loop){
 
             String ChoosedSong = LoadedPlaylist.getNextItemNotLoop();
+
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
             Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
             Genero.setText(XMLController.GetGenero(Metadata));
@@ -112,6 +125,8 @@ public class MusicPlayerController implements Initializable {
             Album.setText(XMLController.GetAlbum(Metadata));
             Year.setText(XMLController.GetYear(Metadata));
             Lyrics.setText(XMLController.GetLyrics(Metadata));
+            SearchFavorite(ChoosedSong);
+
             player.addToPlayList(song);
             player.skipForward();
             System.out.println(ChoosedSong);
@@ -126,6 +141,7 @@ public class MusicPlayerController implements Initializable {
             Album.setText(XMLController.GetAlbum(Metadata));
             Year.setText(XMLController.GetYear(Metadata));
             Lyrics.setText(XMLController.GetLyrics(Metadata));
+            SearchFavorite(ChoosedSong);
             player.addToPlayList(song);
             player.skipForward();
             label.setText(ChoosedSong);
@@ -248,11 +264,41 @@ public class MusicPlayerController implements Initializable {
         volumeDown(0.2);
     }
 
-    @FXML
+    public Void SearchFavorite(String song) throws FileNotFoundException {
+
+        Scanner favorite = new Scanner(song);
+        String cancion = favorite.next();
+        String email = SignInController.getEmail();
+        File file = new File("Users/" + email + "/FavoriteSongs.txt");
+        Scanner scanner;
+
+
+        scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            final String lineFromFile = scanner.nextLine();
+            if (lineFromFile.contains(cancion)) {
+                F=true;
+                Favorite.setVisible(F);
+                break;
+
+            }else{
+                F=false;
+                Favorite.setVisible(F);
+            }
+
+
+        }
+
+
+        return null;
+    }
+
+        @FXML
     void PlaylistChooser(ActionEvent event) throws FileNotFoundException {
         String selected = Playlist.getSelectionModel().getSelectedItem();
         PlayingPlaylist = selected;
         LoadedPlaylist = FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
+
         song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNextItem());
         size = LoadedPlaylist.getSize();
     }

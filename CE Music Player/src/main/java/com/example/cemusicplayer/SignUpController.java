@@ -16,6 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,6 +41,8 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField UserName;
 
+    private String NameOfPlaylist;
+
     String Email;
     String Password;
     String Username;
@@ -50,6 +55,7 @@ public class SignUpController implements Initializable {
         Password = password.getText();
         Username = UserName.getText();
         SignUpUser.CreateUserFolder(Email, Username, Province, Password);
+
 
     }
 
