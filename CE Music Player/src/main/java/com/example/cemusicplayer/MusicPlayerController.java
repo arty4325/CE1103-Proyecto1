@@ -29,6 +29,12 @@ public class MusicPlayerController implements Initializable {
 
 
     @FXML
+    private Label date;
+
+    @FXML
+    private Label time;
+
+    @FXML
     private Label label;
 
     @FXML
@@ -53,7 +59,8 @@ public class MusicPlayerController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
+    @FXML
+    private Label num;
     @FXML
     private Label Favorite;
     private DCLinkedList<String> LoadedPlaylist;
@@ -318,6 +325,10 @@ public class MusicPlayerController implements Initializable {
 
         song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNextItem());
         size = LoadedPlaylist.getSize();
+        date.setText(CreatePlaylistController.getDate());
+        time.setText(CreatePlaylistController.getTime());
+        num.setText(FileInList.getCont());
+
     }
 
     @FXML

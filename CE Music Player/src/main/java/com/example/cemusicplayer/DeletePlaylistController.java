@@ -1,5 +1,6 @@
 package com.example.cemusicplayer;
 
+import com.example.cemusicplayer.DataStructures.DCLinkedList;
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
 import javafx.event.ActionEvent;
@@ -14,7 +15,12 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class DeletePlaylistController implements Initializable {
 
@@ -25,6 +31,8 @@ public class DeletePlaylistController implements Initializable {
     private ComboBox<String> Playlist;
 
     private String ChoosedPlaylist;
+
+    private DCLinkedList<String> load;
 
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
@@ -44,6 +52,8 @@ public class DeletePlaylistController implements Initializable {
         ChoosedPlaylist = selected;
 
     }
+
+
     @FXML
     void Delete(ActionEvent event) throws IOException {
 
@@ -62,6 +72,7 @@ public class DeletePlaylistController implements Initializable {
 
 
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

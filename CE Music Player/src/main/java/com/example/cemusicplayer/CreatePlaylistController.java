@@ -13,6 +13,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 public class CreatePlaylistController {
@@ -20,10 +22,23 @@ public class CreatePlaylistController {
     private Scene scene;
     private Parent root;
 
+    static LocalTime localTime;
+    static LocalDate localDate;
+
     @FXML
     private TextField NameOfEntry;
 
-    private String NameOfPlaylist;
+    private static String NameOfPlaylist;
+
+    public static String getTime() {
+        return String.valueOf(localTime);
+
+    }
+
+    public static String getDate() {
+        return String.valueOf(localDate);
+    }
+
 
     @FXML
     void CreatePlaylist(ActionEvent event) throws IOException {
@@ -31,6 +46,13 @@ public class CreatePlaylistController {
         System.out.println(NameOfPlaylist);
         String Email = SignInController.getEmail();
         File Dir = new File("Users/" + Email + "/" + NameOfPlaylist);
+        localTime = LocalTime.now();
+        localDate = LocalDate.now();
+
+
+
+
+
         if(!Dir.exists()){
             Dir.mkdirs();
             File ExistingPlaylists = new File("Users/" + Email + "/ExistingPlaylist.txt");
@@ -41,7 +63,11 @@ public class CreatePlaylistController {
             Playlistbw.close();
             PlaylistFileWriter.close();
         }
+
+
     }
+
+
 
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
