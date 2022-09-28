@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
@@ -27,6 +28,23 @@ public class MusicPlayerController implements Initializable {
     @FXML
     private ComboBox<String> Playlist;
 
+    @FXML
+    private Button PlayButton;
+
+    @FXML
+    private Button LastButton;
+
+    @FXML
+    private Button NextButton;
+
+    @FXML
+    private Button FavoriteButton;
+
+    @FXML
+    private Button PauseButton;
+
+    @FXML
+    private Button LoopButton;
 
     @FXML
     private Label date;
@@ -40,14 +58,14 @@ public class MusicPlayerController implements Initializable {
     @FXML
     private Label Genero;
 
+
     @FXML
     private Label Album;
 
     @FXML
     private Label Year;
 
-    @FXML
-    private Button favorite;
+
 
     @FXML
     private Label Artist;
@@ -62,18 +80,18 @@ public class MusicPlayerController implements Initializable {
     @FXML
     private Label num;
     @FXML
-    private Label Favorite;
-    private static DCLinkedList<String> LoadedPlaylist;
+    private Label FavoriteLabel;
+    private DCLinkedList<String> LoadedPlaylist;
 
-    private static DCLinkedList<String> DateTime;
+    private DCLinkedList<String> DateTime;
 
     boolean F;
 
     private int size;
 
-    static String PlayingPlaylist;
+    String PlayingPlaylist;
     MP3Player player = new MP3Player();
-    static File song;
+    File song;
     static String ChoosedSong;
     File Metadata;
 
@@ -283,13 +301,13 @@ public class MusicPlayerController implements Initializable {
             final String lineFromFile = scanner.nextLine();
             if (lineFromFile.contains(cancion)) {
                 F=true;
-                Favorite.setVisible(F);
+                FavoriteLabel.setVisible(F);
 
                 break;
 
             }else{
                 F=false;
-                Favorite.setVisible(F);
+                FavoriteLabel.setVisible(F);
             }
 
 
@@ -321,13 +339,42 @@ public class MusicPlayerController implements Initializable {
     void PlaylistChooser(ActionEvent event) throws FileNotFoundException {
         String selected = Playlist.getSelectionModel().getSelectedItem();
         PlayingPlaylist = selected;
-        LoadedPlaylist = FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
+        File play=new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt");
+
         DateTime = FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/DateTime.txt"));
-        song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNextItem());
-        size = LoadedPlaylist.getSize();
+
         date.setText("Fecha: " +Date());
         time.setText("Hora: " + Time());
-        num.setText("Canciones: " + numSongs());
+
+        if (play.exists()){
+            LoadedPlaylist = FileInList.LoadFileOfStringsIntoDCLinkedList(play);
+            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNextItem());
+            num.setText("Canciones: " + numSongs());
+            size = LoadedPlaylist.getSize();
+            PlayButton.setDisable(false);
+            LastButton.setDisable(false);
+            NextButton.setDisable(false);
+            PauseButton.setDisable(false);
+            LoopButton.setDisable(false);
+            FavoriteButton.setDisable(false);
+
+        }else{
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor agregue canciones a su playlist");
+            message.showAndWait();
+            PlayButton.setDisable(true);
+            LastButton.setDisable(true);
+            NextButton.setDisable(true);
+            PauseButton.setDisable(true);
+            LoopButton.setDisable(true);
+            FavoriteButton.setDisable(true);
+
+        }
+
+
+
+
 
     }
 
@@ -366,18 +413,20 @@ public class MusicPlayerController implements Initializable {
         stage.show();
 
     }
-    public static String Time(){
+    public String Time(){
 
         return DateTime.getData(0);
     }
-    public static String Date() {
+    public String Date() {
 
         return DateTime.getData(1);
     }
 
-    public static String numSongs(){
+    public String numSongs(){
         return String.valueOf(LoadedPlaylist.getSize());
     }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/ExistingPlaylist.txt");
