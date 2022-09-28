@@ -30,8 +30,8 @@
       <Label fx:id="Favorite" layoutX="325.0" layoutY="201.0" text="Favorita" visible="false" />
       <Button layoutX="467.0" layoutY="323.0" mnemonicParsing="false" onAction="#AddFavorite" text="Agregar cancion actual Favortos" />
       <Button layoutX="131.0" layoutY="14.0" mnemonicParsing="false" onAction="#DeletePlaylist" text="Eliminar Playlist" />
-      <Label fx:id="time" layoutX="539.0" layoutY="19.0" prefHeight="17.0" prefWidth="113.0" text="Hora" />
-      <Label fx:id="date" layoutX="539.0" layoutY="44.0" prefHeight="17.0" prefWidth="106.0" text="fecha" />
-      <Label fx:id="num" layoutX="540.0" layoutY="77.0" prefHeight="17.0" prefWidth="106.0" />
+      <Label fx:id="time" layoutX="539.0" layoutY="19.0" prefHeight="17.0" prefWidth="113.0" />
+      <Label fx:id="date" layoutX="539.0" layoutY="44.0" prefHeight="17.0" prefWidth="106.0" />
+      <Label fx:id="num" layoutX="539.0" layoutY="69.0" prefHeight="17.0" prefWidth="106.0" />
    </children>
 </AnchorPane>

@@ -63,9 +63,9 @@ public class MusicPlayerController implements Initializable {
     private Label num;
     @FXML
     private Label Favorite;
-    private DCLinkedList<String> LoadedPlaylist;
+    private static DCLinkedList<String> LoadedPlaylist;
 
-    private DCLinkedList<String> FavoriteSongs;
+    private static DCLinkedList<String> DateTime;
 
     boolean F;
 
@@ -322,17 +322,17 @@ public class MusicPlayerController implements Initializable {
         String selected = Playlist.getSelectionModel().getSelectedItem();
         PlayingPlaylist = selected;
         LoadedPlaylist = FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/LoadedSongs.txt"));
-
+        DateTime = FileInList.LoadFileOfStringsIntoDCLinkedList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/DateTime.txt"));
         song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNextItem());
         size = LoadedPlaylist.getSize();
-        date.setText(CreatePlaylistController.getDate());
-        time.setText(CreatePlaylistController.getTime());
-        num.setText(FileInList.getCont());
+        date.setText("Fecha: " +Date());
+        time.setText("Hora: " + Time());
+        num.setText("Canciones: " + numSongs());
 
     }
 
     @FXML
-    void Loop(ActionEvent event) throws FileNotFoundException {
+    void Loop(ActionEvent event)  {
         if(loop==false){
             //player.stop();
             System.out.println("pone loop");
@@ -366,7 +366,18 @@ public class MusicPlayerController implements Initializable {
         stage.show();
 
     }
+    public static String Time(){
 
+        return DateTime.getData(0);
+    }
+    public static String Date() {
+
+        return DateTime.getData(1);
+    }
+
+    public static String numSongs(){
+        return String.valueOf(LoadedPlaylist.getSize());
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/ExistingPlaylist.txt");

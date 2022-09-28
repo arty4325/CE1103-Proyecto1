@@ -1,5 +1,7 @@
 package com.example.cemusicplayer;
 
+import com.example.cemusicplayer.DataStructures.DCLinkedList;
+import com.example.cemusicplayer.InformationManager.FileInList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,15 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 
 public class CreatePlaylistController {
+
+    private static DCLinkedList<String> LoadedPlaylist;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -29,6 +30,11 @@ public class CreatePlaylistController {
     private TextField NameOfEntry;
 
     private static String NameOfPlaylist;
+
+    public static String getNameOfPlaylist() {
+        return NameOfPlaylist;
+
+    }
 
     public static String getTime() {
         return String.valueOf(localTime);
@@ -67,16 +73,49 @@ public class CreatePlaylistController {
 
     }
 
+    public static void SaveDate() throws IOException {
+        String time;
+        String Email = SignInController.getEmail();
+        File dateTime = new File("Users/" + Email + "/" + getNameOfPlaylist() + "/DateTime.txt");
+
+        time= String.valueOf(localTime);
+        String parts = time.substring(0,8);
+
+        FileWriter LoadedSongsFileWriter = new FileWriter(dateTime, true);
+
+        BufferedWriter Songsbw = new BufferedWriter(LoadedSongsFileWriter);
+        Songsbw.write(String.valueOf(localDate));
+        Songsbw.newLine();
+        Songsbw.write(parts);
+        Songsbw.newLine();
+        Songsbw.close();
+        LoadedSongsFileWriter.close();
+    }
+
+
+
+
+
 
 
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("MusicPlayerWindow.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+        if (getNameOfPlaylist() !=null){
+            SaveDate();
+            Parent root = FXMLLoader.load(getClass().getResource("MusicPlayerWindow.fxml"));
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }else{
+            Parent root = FXMLLoader.load(getClass().getResource("MusicPlayerWindow.fxml"));
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
+        }
 
 }
 

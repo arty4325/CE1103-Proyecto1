@@ -31,13 +31,12 @@ public class FileInList {
         DCLinkedList<String> list = new DCLinkedList<>();
         Scanner scan = new Scanner(file);
         while(scan.hasNextLine()){
-            cont+=1;
+
             list.add(scan.nextLine());
+
         }
         return list;
     }
 
-    public static String getCont() {
-        return String.valueOf((cont)-1);
-    }
+
 }
