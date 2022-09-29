@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
@@ -40,11 +41,9 @@ public class DeletePlaylistController implements Initializable {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(true);
         stage.show();
     }
-
-
-
 
     @FXML
     void PlaylistChooser(ActionEvent event) {
@@ -55,21 +54,20 @@ public class DeletePlaylistController implements Initializable {
 
 
     @FXML
-    void Delete(ActionEvent event) throws IOException {
-
-        File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/ExistingPlaylist.txt");
-
-        File FileToBeDeletedMP3 = new File("Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem());
-        System.out.println(FileToBeDeletedMP3);
-        FileToBeDeletedMP3.delete();
+    void Delete(ActionEvent event) {
 
 
-        LinkedList<String> list = new LinkedList<>();
-        list = FileInList.LoadFileOfStringsIntoList(new File("Users/" + SignInController.getEmail() + "/ExistingPlaylist.txt"));
+        if (ChoosedPlaylist != null){
+            File FileToBeDeletedMP3 = new File("Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem());
+            System.out.println(FileToBeDeletedMP3);
+            FileToBeDeletedMP3.delete();
 
-
-
-
+        }else{
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor elija una playlist");
+            message.showAndWait();
+        }
 
     }
 

@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class FileInList {
 
-    private static int cont=0;
+
     public static LinkedList<String> LoadFileOfStringsIntoList(File file) throws FileNotFoundException {
         LinkedList<String> list = new LinkedList<>();
         Scanner scan = new Scanner(file);

@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javax.sound.sampled.*;
@@ -47,6 +48,9 @@ public class MusicPlayerController implements Initializable {
     private Button LoopButton;
 
     @FXML
+    private ImageView fondoFavorito;
+
+    @FXML
     private Label date;
 
     @FXML
@@ -65,6 +69,10 @@ public class MusicPlayerController implements Initializable {
     @FXML
     private Label Year;
 
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button UpButton;
 
 
     @FXML
@@ -79,8 +87,7 @@ public class MusicPlayerController implements Initializable {
     private Parent root;
     @FXML
     private Label num;
-    @FXML
-    private Label FavoriteLabel;
+
     private DCLinkedList<String> LoadedPlaylist;
 
     private DCLinkedList<String> DateTime;
@@ -178,6 +185,7 @@ public class MusicPlayerController implements Initializable {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
     @FXML
@@ -186,6 +194,7 @@ public class MusicPlayerController implements Initializable {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
     @FXML
@@ -194,6 +203,7 @@ public class MusicPlayerController implements Initializable {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
     @FXML
@@ -203,6 +213,7 @@ public class MusicPlayerController implements Initializable {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
     public void play() {
@@ -301,13 +312,13 @@ public class MusicPlayerController implements Initializable {
             final String lineFromFile = scanner.nextLine();
             if (lineFromFile.contains(cancion)) {
                 F=true;
-                FavoriteLabel.setVisible(F);
-
+                fondoFavorito.setVisible(F);
                 break;
 
             }else{
                 F=false;
-                FavoriteLabel.setVisible(F);
+                fondoFavorito.setVisible(F);
+
             }
 
 
@@ -357,6 +368,8 @@ public class MusicPlayerController implements Initializable {
             PauseButton.setDisable(false);
             LoopButton.setDisable(false);
             FavoriteButton.setDisable(false);
+            UpButton.setDisable(false);
+            backButton.setDisable(false);
 
         }else{
             Alert message = new Alert(Alert.AlertType.WARNING);
@@ -371,10 +384,6 @@ public class MusicPlayerController implements Initializable {
             FavoriteButton.setDisable(true);
 
         }
-
-
-
-
 
     }
 
@@ -399,6 +408,7 @@ public class MusicPlayerController implements Initializable {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
 
     }
@@ -410,6 +420,7 @@ public class MusicPlayerController implements Initializable {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
 
     }
@@ -424,6 +435,17 @@ public class MusicPlayerController implements Initializable {
 
     public String numSongs(){
         return String.valueOf(LoadedPlaylist.getSize());
+    }
+
+    public void Return(ActionEvent event) throws IOException {
+        player.stop();
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+
     }
 
 

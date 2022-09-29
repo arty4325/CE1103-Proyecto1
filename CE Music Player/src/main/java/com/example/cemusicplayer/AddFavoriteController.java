@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
@@ -82,14 +83,23 @@ public class AddFavoriteController implements Initializable {
         DestPLaylist=ChoosedPlaylist;
         System.out.println(NameOfSong);
 
+        if (NameOfSong == null){
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor elija una cancion");
+            message.showAndWait();
 
-        File LoadedSongs = new File("Users/" + Email + "/" + "/FavoriteSongs.txt");
-        FileWriter LoadedSongsFileWriter = new FileWriter(LoadedSongs, true);
-        BufferedWriter Songsbw = new BufferedWriter(LoadedSongsFileWriter);
-        Songsbw.write(NameOfSong);
-        Songsbw.newLine();
-        Songsbw.close();
-        LoadedSongsFileWriter.close();
+        }else{
+            File LoadedSongs = new File("Users/" + Email + "/" + "/FavoriteSongs.txt");
+            FileWriter LoadedSongsFileWriter = new FileWriter(LoadedSongs, true);
+            BufferedWriter Songsbw = new BufferedWriter(LoadedSongsFileWriter);
+            Songsbw.write(NameOfSong);
+            Songsbw.newLine();
+            Songsbw.close();
+            LoadedSongsFileWriter.close();
+
+        }
+
 
 
     }

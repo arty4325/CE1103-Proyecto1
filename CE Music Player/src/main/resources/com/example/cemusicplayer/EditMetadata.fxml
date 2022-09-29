@@ -4,22 +4,31 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.EditMetadata">
+<AnchorPane prefHeight="349.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cemusicplayer.EditMetadata">
    <children>
-      <Button layoutX="23.0" layoutY="360.0" mnemonicParsing="false" onAction="#ReturnToMain" text="Return" />
-      <TextField fx:id="Genero" layoutX="190.0" layoutY="98.0" prefHeight="26.0" prefWidth="198.0" />
-      <TextField fx:id="Artista" layoutX="190.0" layoutY="158.0" prefHeight="26.0" prefWidth="198.0" />
-      <TextField fx:id="Album" layoutX="190.0" layoutY="218.0" prefHeight="26.0" prefWidth="198.0" />
-      <TextField fx:id="Year" layoutX="190.0" layoutY="282.0" prefHeight="9.0" prefWidth="198.0" />
-      <TextField fx:id="Letra" layoutX="190.0" layoutY="334.0" prefHeight="18.0" prefWidth="198.0" />
-      <Label layoutX="269.0" layoutY="61.0" text="Genero" />
-      <Label layoutX="267.0" layoutY="131.0" text="Artista" />
-      <Label layoutX="267.0" layoutY="191.0" text="Album" />
-      <Label layoutX="271.0" layoutY="251.0" text="Año" />
-      <Label layoutX="268.0" layoutY="312.0" text="Letra" />
-      <Button layoutX="453.0" layoutY="295.0" mnemonicParsing="false" onAction="#Save" text="Guardar Cambios" />
+      <ImageView fitHeight="358.0" fitWidth="600.0" preserveRatio="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <Image url="@Imagenes/fondo4.png" />
+      </ImageView>
+      <Button layoutX="28.0" layoutY="316.0" mnemonicParsing="false" onAction="#ReturnToMain" text="Return" />
+      <TextField fx:id="Genero" layoutX="191.0" layoutY="48.0" prefHeight="26.0" prefWidth="198.0" />
+      <TextField fx:id="Artista" layoutX="190.0" layoutY="98.0" prefHeight="26.0" prefWidth="198.0" />
+      <TextField fx:id="Album" layoutX="191.0" layoutY="145.0" prefHeight="26.0" prefWidth="198.0" />
+      <TextField fx:id="Year" layoutX="190.0" layoutY="188.0" prefHeight="9.0" prefWidth="198.0" />
+      <TextField fx:id="Letra" layoutX="192.0" layoutY="236.0" prefHeight="18.0" prefWidth="198.0" />
+      <Label layoutX="265.0" layoutY="19.0" text="Genero" textFill="#176c97" />
+      <Label layoutX="267.0" layoutY="80.0" text="Artista" textFill="#176c97" />
+      <Label layoutX="272.0" layoutY="128.0" text="Album" textFill="#176c97" />
+      <Label layoutX="279.0" layoutY="170.0" text="Año" textFill="#176c97" />
+      <Label layoutX="277.0" layoutY="219.0" text="Letra" textFill="#176c97" />
+      <Button layoutX="425.0" layoutY="236.0" mnemonicParsing="false" onAction="#Save" text="Guardar Cambios" />
       <ComboBox fx:id="Playlist" layoutX="425.0" layoutY="36.0" onAction="#PlaylistChooser" prefWidth="150.0" promptText="PLayLIst" />
       <ComboBox fx:id="Song" layoutX="425.0" layoutY="111.0" onAction="#SongChooser" prefWidth="150.0" promptText="Song" />
    </children>
