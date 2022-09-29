@@ -17,19 +17,18 @@
          </effect>
          <Image url="@Imagenes/fondo4.png" />
       </ImageView>
-      <Button fx:id="PlayButton" disable="true" layoutX="174.0" layoutY="185.0" mnemonicParsing="false" onAction="#play" text="Play" />
-      <Button fx:id="PauseButton" disable="true" layoutX="528.0" layoutY="185.0" mnemonicParsing="false" onAction="#Pause" text="Pause" />
-      <Button fx:id="backButton" disable="true" layoutX="395.0" layoutY="185.0" mnemonicParsing="false" onAction="#down" text="Menos" />
+      <Button fx:id="PauseButton" disable="true" layoutX="243.0" layoutY="185.0" mnemonicParsing="false" onAction="#Pause" text="Pause" />
+      <Button fx:id="backButton" disable="true" layoutX="440.0" layoutY="185.0" mnemonicParsing="false" onAction="#down" text="Menos" />
       <Button layoutX="4.0" layoutY="14.0" mnemonicParsing="false" onAction="#LSongs" prefHeight="25.0" prefWidth="96.0" text="Create Playlist" />
       <Button layoutX="1.0" layoutY="57.0" mnemonicParsing="false" onAction="#AddMusic" prefHeight="25.0" prefWidth="132.0" text="Add Music To Playlist" />
-      <Button fx:id="UpButton" disable="true" layoutX="466.0" layoutY="185.0" mnemonicParsing="false" onAction="#Up" text="mas" />
+      <Button fx:id="UpButton" disable="true" layoutX="527.0" layoutY="185.0" mnemonicParsing="false" onAction="#Up" text="mas" />
       <ComboBox fx:id="Playlist" layoutX="346.0" layoutY="14.0" onAction="#PlaylistChooser" prefWidth="150.0" promptText="Playlist" />
-      <Button fx:id="NextButton" disable="true" layoutX="326.0" layoutY="185.0" mnemonicParsing="false" onAction="#NextSong" prefHeight="3.0" prefWidth="41.0" text="Next" />
-      <Button fx:id="LastButton" disable="true" layoutX="253.0" layoutY="185.0" mnemonicParsing="false" onAction="#LastSong" text="Last" />
-      <Button fx:id="LoopButton" disable="true" layoutX="611.0" layoutY="185.0" mnemonicParsing="false" onAction="#Loop" text="Loop" />
-      <Label fx:id="label" layoutX="203.0" layoutY="87.0" prefHeight="36.0" prefWidth="214.0" textFill="#1682b9">
+      <Button fx:id="NextButton" disable="true" layoutX="369.0" layoutY="185.0" mnemonicParsing="false" onAction="#NextSong" prefHeight="3.0" prefWidth="41.0" text="Next" />
+      <Button fx:id="LastButton" disable="true" layoutX="308.0" layoutY="185.0" mnemonicParsing="false" onAction="#LastSong" text="Last" />
+      <Button fx:id="LoopButton" disable="true" layoutX="602.0" layoutY="185.0" mnemonicParsing="false" onAction="#Loop" text="Loop" />
+      <Label fx:id="label" layoutX="143.0" layoutY="87.0" prefHeight="36.0" prefWidth="246.0" textFill="#1682b9">
          <font>
-            <Font name="System Italic" size="25.0" />
+            <Font name="System Italic" size="16.0" />
          </font></Label>
       <Label fx:id="Genero" layoutX="219.0" layoutY="255.0" prefHeight="18.0" prefWidth="234.0" textFill="#1682b9" />
       <Label fx:id="Album" layoutX="221.0" layoutY="282.0" prefHeight="18.0" prefWidth="186.0" textFill="#1682b9">
@@ -54,6 +53,7 @@
          <Image url="@Imagenes/favorito.png" />
       </ImageView>
       <Button layoutX="4.0" layoutY="363.0" mnemonicParsing="false" onAction="#Return" prefHeight="26.0" prefWidth="113.0" text="Return" />
+      <Button fx:id="PlayButton" disable="true" layoutX="191.0" layoutY="185.0" mnemonicParsing="false" onAction="#play" text="Play" />
          
    </children>
 </AnchorPane>

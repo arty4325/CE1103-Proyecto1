@@ -216,20 +216,18 @@ public class MusicPlayerController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
-    public void play() {
-        System.out.println(PlayingPlaylist);
-        player.addToPlayList(song);
-        player.play();
-    }
+
 
     public void Pause(){
-        if (c== true){
-            player.pause();
-            c=false;
-        }else{
-            player.play();
-            c=true;
-        }
+       PlayButton.setDisable(false);
+       player.pause();
+       PauseButton.setDisable(true);
+    }
+
+    public void play(){
+        PauseButton.setDisable(false);
+        player.play();
+        PlayButton.setDisable(true);
     }
     public void volumeDown(Double d){
         Mixer.Info [] mixers= AudioSystem.getMixerInfo();
@@ -358,11 +356,22 @@ public class MusicPlayerController implements Initializable {
         time.setText("Hora: " + Time());
 
         if (play.exists()){
+
             LoadedPlaylist = FileInList.LoadFileOfStringsIntoDCLinkedList(play);
+
             song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNextItem());
+            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getData(0)+".xml");
+            label.setText(LoadedPlaylist.getData(0));
+            Genero.setText(XMLController.GetGenero(Metadata));
+            Artist.setText(XMLController.GetArtist(Metadata));
+            Album.setText(XMLController.GetAlbum(Metadata));
+            Year.setText(XMLController.GetYear(Metadata));
+            Lyrics.setText(XMLController.GetLyrics(Metadata));
+            player.addToPlayList(song);
+            player.play();
             num.setText("Canciones: " + numSongs());
             size = LoadedPlaylist.getSize();
-            PlayButton.setDisable(false);
+
             LastButton.setDisable(false);
             NextButton.setDisable(false);
             PauseButton.setDisable(false);
@@ -376,7 +385,7 @@ public class MusicPlayerController implements Initializable {
             message.setTitle("Advertencia");
             message.setContentText("Por favor agregue canciones a su playlist");
             message.showAndWait();
-            PlayButton.setDisable(true);
+
             LastButton.setDisable(true);
             NextButton.setDisable(true);
             PauseButton.setDisable(true);
