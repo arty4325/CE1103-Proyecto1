@@ -92,7 +92,7 @@ public class MusicPlayerController implements Initializable {
 
     private DCLinkedList<String> DateTime;
 
-    boolean F;
+    static boolean F = true;
 
     private int size;
 
@@ -105,77 +105,93 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     void LastSong(ActionEvent event) throws FileNotFoundException {
-        if (loop == false){
-            ChoosedSong = LoadedPlaylist.getBackItemNotLoop();
-            label.setText(ChoosedSong);
-            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
-            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
-            Genero.setText(XMLController.GetGenero(Metadata));
-            Artist.setText(XMLController.GetArtist(Metadata));
-            Album.setText(XMLController.GetAlbum(Metadata));
-            Year.setText(XMLController.GetYear(Metadata));
-            Lyrics.setText(XMLController.GetLyrics(Metadata));
-            SearchFavorite(ChoosedSong);
+        if (PlayingPlaylist != null) {
+            if (loop == false) {
+                ChoosedSong = LoadedPlaylist.getBackItemNotLoop();
+                label.setText(ChoosedSong);
+                song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+                Metadata = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong + ".xml");
+                Genero.setText(XMLController.GetGenero(Metadata));
+                Artist.setText(XMLController.GetArtist(Metadata));
+                Album.setText(XMLController.GetAlbum(Metadata));
+                Year.setText(XMLController.GetYear(Metadata));
+                Lyrics.setText(XMLController.GetLyrics(Metadata));
+                SearchFavorite(ChoosedSong);
 
-            player.addToPlayList(song);
-            player.skipForward();
+                player.addToPlayList(song);
+                player.skipForward();
 
-            System.out.println(ChoosedSong);
-        }else if (loop == true){
-            String ChoosedSong = LoadedPlaylist.getBackItem();
-            label.setText(ChoosedSong);
-            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
-            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
-            Genero.setText(XMLController.GetGenero(Metadata));
-            Artist.setText(XMLController.GetArtist(Metadata));
-            Album.setText(XMLController.GetAlbum(Metadata));
-            Year.setText(XMLController.GetYear(Metadata));
-            Lyrics.setText(XMLController.GetLyrics(Metadata));
+                System.out.println(ChoosedSong);
+            } else if (loop == true) {
+                String ChoosedSong = LoadedPlaylist.getBackItem();
+                label.setText(ChoosedSong);
+                song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+                Metadata = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong + ".xml");
+                Genero.setText(XMLController.GetGenero(Metadata));
+                Artist.setText(XMLController.GetArtist(Metadata));
+                Album.setText(XMLController.GetAlbum(Metadata));
+                Year.setText(XMLController.GetYear(Metadata));
+                Lyrics.setText(XMLController.GetLyrics(Metadata));
 
-            SearchFavorite(ChoosedSong);
+                SearchFavorite(ChoosedSong);
 
-            player.addToPlayList(song);
-            player.skipForward();
+                player.addToPlayList(song);
+                player.skipForward();
 
 
-            System.out.println(ChoosedSong);
+                System.out.println(ChoosedSong);
+            }
+        }else{
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor elija una playlist");
+            message.showAndWait();
+
         }
     }
 
     @FXML
     void NextSong(ActionEvent event) throws FileNotFoundException {
-        if (!loop){
+        if (PlayingPlaylist != null) {
+            if (!loop) {
 
-            String ChoosedSong = LoadedPlaylist.getNextItemNotLoop();
+                String ChoosedSong = LoadedPlaylist.getNextItemNotLoop();
 
-            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
-            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
-            Genero.setText(XMLController.GetGenero(Metadata));
-            Artist.setText(XMLController.GetArtist(Metadata));
-            Album.setText(XMLController.GetAlbum(Metadata));
-            Year.setText(XMLController.GetYear(Metadata));
-            Lyrics.setText(XMLController.GetLyrics(Metadata));
-            SearchFavorite(ChoosedSong);
+                song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+                Metadata = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong + ".xml");
+                Genero.setText(XMLController.GetGenero(Metadata));
+                Artist.setText(XMLController.GetArtist(Metadata));
+                Album.setText(XMLController.GetAlbum(Metadata));
+                Year.setText(XMLController.GetYear(Metadata));
+                Lyrics.setText(XMLController.GetLyrics(Metadata));
+                SearchFavorite(ChoosedSong);
 
-            player.addToPlayList(song);
-            player.skipForward();
-            System.out.println(ChoosedSong);
-            label.setText(ChoosedSong);
-            System.out.println("Loop Song");
-        } else if (loop){
-            String ChoosedSong = LoadedPlaylist.getNextItem();
-            song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
-            Metadata= new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong+".xml");
-            Genero.setText(XMLController.GetGenero(Metadata));
-            Artist.setText(XMLController.GetArtist(Metadata));
-            Album.setText(XMLController.GetAlbum(Metadata));
-            Year.setText(XMLController.GetYear(Metadata));
-            Lyrics.setText(XMLController.GetLyrics(Metadata));
-            SearchFavorite(ChoosedSong);
-            player.addToPlayList(song);
-            player.skipForward();
-            label.setText(ChoosedSong);
-            System.out.println(ChoosedSong);
+                player.addToPlayList(song);
+                player.skipForward();
+                System.out.println(ChoosedSong);
+                label.setText(ChoosedSong);
+                System.out.println("Loop Song");
+            } else if (loop) {
+                String ChoosedSong = LoadedPlaylist.getNextItem();
+                song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong);
+                Metadata = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + ChoosedSong + ".xml");
+                Genero.setText(XMLController.GetGenero(Metadata));
+                Artist.setText(XMLController.GetArtist(Metadata));
+                Album.setText(XMLController.GetAlbum(Metadata));
+                Year.setText(XMLController.GetYear(Metadata));
+                Lyrics.setText(XMLController.GetLyrics(Metadata));
+                SearchFavorite(ChoosedSong);
+                player.addToPlayList(song);
+                player.skipForward();
+                label.setText(ChoosedSong);
+                System.out.println(ChoosedSong);
+            }
+        }else{
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor elija una playlist");
+            message.showAndWait();
+
         }
     }
 
@@ -219,15 +235,33 @@ public class MusicPlayerController implements Initializable {
 
 
     public void Pause(){
-       PlayButton.setDisable(false);
-       player.pause();
-       PauseButton.setDisable(true);
+        if (PlayingPlaylist != null) {
+            PlayButton.setDisable(false);
+            player.pause();
+            PauseButton.setDisable(true);
+        }else{
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor elija una playlist");
+            message.showAndWait();
+        }
+
     }
 
     public void play(){
-        PauseButton.setDisable(false);
-        player.play();
-        PlayButton.setDisable(true);
+
+
+        if (PlayingPlaylist != null) {
+            PauseButton.setDisable(false);
+            player.play();
+            PlayButton.setDisable(true);
+        }else{
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor elija una playlist");
+            message.showAndWait();
+
+        }
     }
     public void volumeDown(Double d){
         Mixer.Info [] mixers= AudioSystem.getMixerInfo();
@@ -332,16 +366,24 @@ public class MusicPlayerController implements Initializable {
 
 
         System.out.println(label);
+        if (PlayingPlaylist != null){
+            File LoadedSongs = new File("Users/" + Email + "/" + "/FavoriteSongs.txt");
+            FileWriter LoadedSongsFileWriter = new FileWriter(LoadedSongs, true);
+            BufferedWriter Songsbw = new BufferedWriter(LoadedSongsFileWriter);
 
-        File LoadedSongs = new File("Users/" + Email + "/" + "/FavoriteSongs.txt");
-        FileWriter LoadedSongsFileWriter = new FileWriter(LoadedSongs, true);
-        BufferedWriter Songsbw = new BufferedWriter(LoadedSongsFileWriter);
+            Songsbw.write(String.valueOf(label));
+            Songsbw.newLine();
+            Songsbw.close();
+            LoadedSongsFileWriter.close();
+            SearchFavorite(String.valueOf(label));
 
-        Songsbw.write(String.valueOf(label));
-        Songsbw.newLine();
-        Songsbw.close();
-        LoadedSongsFileWriter.close();
-        SearchFavorite(String.valueOf(label));
+        }else{
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor elija una playlist");
+            message.showAndWait();
+        }
+
     }
 
         @FXML
@@ -367,18 +409,13 @@ public class MusicPlayerController implements Initializable {
             Album.setText(XMLController.GetAlbum(Metadata));
             Year.setText(XMLController.GetYear(Metadata));
             Lyrics.setText(XMLController.GetLyrics(Metadata));
+            SearchFavorite(LoadedPlaylist.getData(0));
             player.addToPlayList(song);
             player.play();
             num.setText("Canciones: " + numSongs());
             size = LoadedPlaylist.getSize();
 
-            LastButton.setDisable(false);
-            NextButton.setDisable(false);
-            PauseButton.setDisable(false);
-            LoopButton.setDisable(false);
-            FavoriteButton.setDisable(false);
-            UpButton.setDisable(false);
-            backButton.setDisable(false);
+
 
         }else{
             Alert message = new Alert(Alert.AlertType.WARNING);
@@ -386,11 +423,7 @@ public class MusicPlayerController implements Initializable {
             message.setContentText("Por favor agregue canciones a su playlist");
             message.showAndWait();
 
-            LastButton.setDisable(true);
-            NextButton.setDisable(true);
-            PauseButton.setDisable(true);
-            LoopButton.setDisable(true);
-            FavoriteButton.setDisable(true);
+
 
         }
 
@@ -398,16 +431,24 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     void Loop(ActionEvent event)  {
-        if(loop==false){
-            //player.stop();
-            System.out.println("pone loop");
-            loop = true;
-            System.out.println(loop);
+        if (PlayingPlaylist != null) {
+
+            if (loop == false) {
+                //player.stop();
+                System.out.println("pone loop");
+                loop = true;
+                System.out.println(loop);
+            } else {
+                // song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
+                loop = false;
+                System.out.println("quita loop");
+                System.out.println(loop);
+            }
         }else{
-           // song = new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/" + LoadedPlaylist.getNext());
-            loop=false;
-            System.out.println("quita loop");
-            System.out.println(loop);
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor agregue canciones a su playlist");
+            message.showAndWait();
         }
     }
     @FXML
