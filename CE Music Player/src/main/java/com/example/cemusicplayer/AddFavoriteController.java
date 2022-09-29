@@ -69,9 +69,6 @@ public class AddFavoriteController implements Initializable {
     void SongChooser(ActionEvent event) {
         ChoosedSong = Song.getSelectionModel().getSelectedItem();
         ChoosedPlaylist = Playlist.getSelectionModel().getSelectedItem();
-
-
-
     }
 
     @FXML

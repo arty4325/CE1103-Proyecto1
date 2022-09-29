@@ -335,7 +335,7 @@ public class MusicPlayerController implements Initializable {
         Scanner favorite = new Scanner(song);
         String cancion = favorite.next();
         String email = SignInController.getEmail();
-        File file = new File("Users/" + email + "/FavoriteSongs.txt");
+        File file = new File("Users/" + email + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
         Scanner scanner;
 
 
@@ -367,7 +367,7 @@ public class MusicPlayerController implements Initializable {
 
         System.out.println(label);
         if (PlayingPlaylist != null){
-            File LoadedSongs = new File("Users/" + Email + "/" + "/FavoriteSongs.txt");
+            File LoadedSongs = new File("Users/" + Email + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
             FileWriter LoadedSongsFileWriter = new FileWriter(LoadedSongs, true);
             BufferedWriter Songsbw = new BufferedWriter(LoadedSongsFileWriter);
 

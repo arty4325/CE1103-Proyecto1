@@ -1,6 +1,0 @@
-Breathe (In The Air).mp3
-On The Run.mp3
-Label[id=label, styleClass=label]'Eclipse.mp3'
-Label[id=label, styleClass=label]'Pink Floyd – Time (Official Audio).mp3'
-Us And Them.mp3
-Label[id=label, styleClass=label]'Any Colour You Like.mp3'

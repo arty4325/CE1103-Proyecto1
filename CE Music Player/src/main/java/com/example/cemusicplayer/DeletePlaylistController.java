@@ -54,13 +54,38 @@ public class DeletePlaylistController implements Initializable {
 
 
     @FXML
-    void Delete(ActionEvent event) {
+    void Delete(ActionEvent event) throws FileNotFoundException {
 
-
+        // https://www.programiz.com/java-programming/examples/delete-directory#:~:text=In%20Java%2C%20to%20delete%20a,we%20can%20delete%20the%20directory.&text=In%20the%20above%20example%2C%20we%20have%20used%20the%20for%2Deach,files%20present%20in%20the%20directory.
         if (ChoosedPlaylist != null){
-            File FileToBeDeletedMP3 = new File("Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem());
-            System.out.println(FileToBeDeletedMP3);
-            FileToBeDeletedMP3.delete();
+            //System.out.println(ChoosedPlaylist);
+            //File FileToBeDeletedMP3 = new File("Users/" + SignInController.getEmail() + "/" + ChoosedPlaylist);
+            //System.out.println(FileToBeDeletedMP3);
+            //FileToBeDeletedMP3.delete();
+            try {
+                // create a new file object
+                File directory = new File("Users/" + SignInController.getEmail() + "/" + ChoosedPlaylist);
+
+                // list all the files in an array
+                File[] files = directory.listFiles();
+
+                // delete each file from the directory
+                for(File file : files) {
+                    System.out.println(file + " deleted.");
+                    file.delete();
+                }
+
+                // delete the directory
+                if(directory.delete()) {
+                    System.out.println("Directory Deleted");
+                }
+                else {
+                    System.out.println("Directory not Found");
+                }
+
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
 
         }else{
             Alert message = new Alert(Alert.AlertType.WARNING);
@@ -68,6 +93,7 @@ public class DeletePlaylistController implements Initializable {
             message.setContentText("Por favor elija una playlist");
             message.showAndWait();
         }
+
 
     }
 
