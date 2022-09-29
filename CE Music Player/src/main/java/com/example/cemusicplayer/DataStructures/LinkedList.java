@@ -3,6 +3,8 @@ package com.example.cemusicplayer.DataStructures;
 public class LinkedList<T> {
     private SimpleNode<T> head;
     private SimpleNode<T> observer;
+    private SimpleNode<T> secondObserver;
+
     private int size;
     public LinkedList(){
         head = null;
@@ -36,6 +38,19 @@ public class LinkedList<T> {
             return null;
         }
     }
+    public T getNext2(){
+        SimpleNode<T> Temp = head;
+        if(secondObserver == head){
+            secondObserver = secondObserver.getNext();
+            return get(0);
+        } else if (secondObserver != null){
+            Temp = secondObserver;
+            secondObserver = secondObserver.getNext();
+            return Temp.getData();
+        } else {
+            return null;
+        }
+    }
 
 
 
@@ -43,7 +58,7 @@ public class LinkedList<T> {
         SimpleNode<T> node = head;
         SimpleNode<T> newNode = new SimpleNode<>(data);
         if(head == null){
-            head = observer = newNode;
+            head = observer = secondObserver = newNode;
             this.size++;
             return newNode.getData();
         } else {
@@ -84,18 +99,18 @@ public class LinkedList<T> {
         this.size--;
         return FinalNode.getData();
     }
+
+
     public int IndexOfItem(String Item){
         SimpleNode<T> Checker = head;
         int Value = 0;
+        System.out.println("Item" + Item);
         for (int i = 0; i < size; i++){
-
-            if (get(i) == Item){
-                System.out.println("Es Igual");
+            System.out.println(get(i));
+            if (Item.equals(get(i))){
                 Value = i;
             }
         }
-        this.size--;
-        System.out.println("End Of Loop");
         return Value;
     }
 

@@ -2,6 +2,7 @@ package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
+import com.example.cemusicplayer.InformationManager.ListInFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +62,7 @@ public class DeleteMusicController implements Initializable {
         LinkedList<String> list = new LinkedList<>();
         list = FileInList.LoadFileOfStringsIntoList(new File("Users/" + SignInController.getEmail() + "/" + Playlist.getSelectionModel().getSelectedItem() + "/LoadedSongs.txt"));
 
+
         System.out.println("Before Deleting");
         System.out.println(Song.getSelectionModel().getSelectedItem());
 
@@ -68,13 +70,12 @@ public class DeleteMusicController implements Initializable {
         Number = list.IndexOfItem(Song.getSelectionModel().getSelectedItem());
         System.out.println(Number);
 
+        list.delete(Number);
+        System.out.println(list.getSize());
+        System.out.println("Algo443" + list.get(list.getSize() - 1));
 
-        //System.out.println(list.getNext());
-        //System.out.println(list.getNext());
-        //System.out.println(list.getNext());
-        //System.out.println(list.getNext());
-        //System.out.println(list.getNext());
-        //System.out.println(list.getNext());
+
+        ListInFile.CreateFileWithListInfo(list, "Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem() + "/LoadedSongs.txt");
     }
 
     @FXML
