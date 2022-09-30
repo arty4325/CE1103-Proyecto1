@@ -406,8 +406,6 @@ public class MusicPlayerController implements Initializable {
     @FXML
     void AddFavorite(ActionEvent event) throws IOException {
         String Email = SignInController.getEmail();
-
-
         System.out.println(label);
         if (PlayingPlaylist != null){
             File LoadedSongs = new File("Users/" + Email + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
@@ -426,7 +424,7 @@ public class MusicPlayerController implements Initializable {
             message.setContentText("Por favor elija una playlist");
             message.showAndWait();
         }
-
+        fondoFavorito.setVisible(true);
     }
 
         @FXML
