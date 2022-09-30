@@ -1,3 +1,0 @@
-Label[id=label, styleClass=label]'Any Colour You Like.mp3'
-Label[id=label, styleClass=label]'Speak To Me.mp3'
-Label[id=label, styleClass=label]'On The Run.mp3'

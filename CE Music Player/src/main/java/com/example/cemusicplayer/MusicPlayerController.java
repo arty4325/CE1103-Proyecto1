@@ -13,12 +13,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
+
 import javax.sound.sampled.*;
 import java.io.*;
 import java.net.URL;
@@ -65,6 +63,7 @@ public class MusicPlayerController implements Initializable {
     private Label Genero;
 
 
+
     @FXML
     private Label Album;
 
@@ -75,8 +74,8 @@ public class MusicPlayerController implements Initializable {
     private Button backButton;
     @FXML
     private Button UpButton;
-
-
+    @FXML
+    private TextArea SongLyrics;
     @FXML
     private Label Artist;
 
@@ -118,6 +117,7 @@ public class MusicPlayerController implements Initializable {
                 Album.setText(XMLController.GetAlbum(Metadata));
                 Year.setText(XMLController.GetYear(Metadata));
                 Lyrics.setText(XMLController.GetLyrics(Metadata));
+                SongLyrics.setText(XMLController.GetLyrics(Metadata));
                 SearchFavorite(ChoosedSong);
 
                 player.addToPlayList(song);
@@ -134,6 +134,7 @@ public class MusicPlayerController implements Initializable {
                 Album.setText(XMLController.GetAlbum(Metadata));
                 Year.setText(XMLController.GetYear(Metadata));
                 Lyrics.setText(XMLController.GetLyrics(Metadata));
+                SongLyrics.setText(XMLController.GetLyrics(Metadata));
 
                 SearchFavorite(ChoosedSong);
 
@@ -167,6 +168,7 @@ public class MusicPlayerController implements Initializable {
                 Year.setText(XMLController.GetYear(Metadata));
                 Lyrics.setText(XMLController.GetLyrics(Metadata));
                 SearchFavorite(ChoosedSong);
+                SongLyrics.setText(XMLController.GetLyrics(Metadata));
 
                 player.addToPlayList(song);
                 player.skipForward();
@@ -182,6 +184,7 @@ public class MusicPlayerController implements Initializable {
                 Album.setText(XMLController.GetAlbum(Metadata));
                 Year.setText(XMLController.GetYear(Metadata));
                 Lyrics.setText(XMLController.GetLyrics(Metadata));
+                SongLyrics.setText(XMLController.GetLyrics(Metadata));
                 SearchFavorite(ChoosedSong);
                 player.addToPlayList(song);
                 player.skipForward();
@@ -226,13 +229,30 @@ public class MusicPlayerController implements Initializable {
     }
     @FXML
     void DeleteFavourite(ActionEvent event) throws FileNotFoundException {
-        LinkedList<String> list = new LinkedList<>();
-        list = FileInList.LoadFileOfStringsIntoList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/FavoriteSongs.txt"));
-        int Number;
-        Number = list.IndexOfItem(String.valueOf(label));
+        if (PlayingPlaylist != null){
 
-        list.delete(Number);
-        ListInFile.CreateFileWithListInfo(list, "Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
+            LinkedList<String> list = new LinkedList<>();
+            list = FileInList.LoadFileOfStringsIntoList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/FavoriteSongs.txt"));
+            int Number;
+            Number = list.IndexOfItem(String.valueOf(label));
+            if (boolFavorite(String.valueOf(label))==true){
+                list.delete(Number);
+                ListInFile.CreateFileWithListInfo(list, "Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
+                fondoFavorito.setVisible(false);
+
+            }else{
+                Alert message = new Alert(Alert.AlertType.WARNING);
+                message.setTitle("Advertencia");
+                message.setContentText("Esta cancion no esta en favoritos");
+                message.showAndWait();
+            }
+
+        }else{
+            Alert message = new Alert(Alert.AlertType.WARNING);
+            message.setTitle("Advertencia");
+            message.setContentText("Por favor elija una playlist");
+            message.showAndWait();
+        }
     }
 
     @FXML
@@ -368,6 +388,21 @@ public class MusicPlayerController implements Initializable {
         return null;
     }
 
+    public Boolean boolFavorite(String song) throws FileNotFoundException {
+        Scanner favorite = new Scanner(song);
+        String cancion = favorite.next();
+        String email = SignInController.getEmail();
+        File file = new File("Users/" + email + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
+        Scanner scanner;
+        scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            final String lineFromFile = scanner.nextLine();
+            if (lineFromFile.contains(cancion)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @FXML
     void AddFavorite(ActionEvent event) throws IOException {
         String Email = SignInController.getEmail();

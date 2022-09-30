@@ -4,6 +4,7 @@ module com.example.cemusicplayer {
     requires jaco.mp3.player;
     requires org.jdom2;
     requires java.desktop;
+    requires com.fazecast.jSerialComm;
 
 
     opens com.example.cemusicplayer to javafx.fxml;
