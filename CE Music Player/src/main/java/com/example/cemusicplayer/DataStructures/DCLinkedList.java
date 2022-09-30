@@ -1,10 +1,19 @@
 package com.example.cemusicplayer.DataStructures;
 
+/**
+ * Lista Doblemente enlazada circular, utilizada para reproduccion musical en la aplicacion
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
+
 public class DCLinkedList<T> {
     private DoublyNode<T> head;
     private DoublyNode<T> tail;
     private DoublyNode<T> observer;
     private int size;
+    /**
+     * Se definen el head, tail y size de la lista
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public DCLinkedList() {
         this.head = null;
         this.tail = null;
@@ -14,6 +23,10 @@ public class DCLinkedList<T> {
         this.observer = NewNode;
     }
 
+    /**
+     * @param data La informacion que se quiere agregar a la lista doblementre enlazada circular
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public void add(T data){
         DoublyNode<T> NewNode = new DoublyNode<>(data);
         NewNode.setNext(null);
@@ -36,6 +49,12 @@ public class DCLinkedList<T> {
         }
         this.size++;
     }
+
+    /**
+     * @param position La posicion del nodo que se quiere obtener
+     * @return El nodo en la posicion indicada
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public DoublyNode<T> getNode(int position){
         DoublyNode<T> node = tail;
         for(int index=size-1;index>position;index--){
@@ -76,6 +95,11 @@ public class DCLinkedList<T> {
         return observer;
     }
 
+    /**
+     * Obtiene el siguiente elemento de un observador, esta implementado de manera circular para la reproduccion continua
+     * @return Retorna el elemento que esta inmediatamente despues del observer, utilizado para la reproduccion de musica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public T getNextItem(){
         DoublyNode<T>Temp = head;
         if(observer == head){
@@ -91,6 +115,12 @@ public class DCLinkedList<T> {
             return observer.getData();
         }
     }
+
+    /**
+     * Obtiene el siguiente elemento de un observador, esta implementado de manera circular para la reproduccion normal
+     * @return Retorna el elemento que esta inmediatamente despues del observer, utilizado para la reproduccion de musica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public T getNextItemNotLoop(){
         DoublyNode<T>Temp = head;
         if(observer == tail){
@@ -106,7 +136,11 @@ public class DCLinkedList<T> {
             return null;
         }
     }
-
+    /**
+     * Obtiene el elemento anterior de un observador, esta implementado de manera circular para la reproduccion continua
+     * @return Retorna el elemento que esta inmediatamente antes del observer, utilizado para la reproduccion de musica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     * */
    public T getBackItem(){
        DoublyNode<T>Temp = head;
        if (observer != null) {
@@ -121,6 +155,11 @@ public class DCLinkedList<T> {
            return getData(size - 1);
        }
    }
+    /**
+     * Obtiene el elemento anterior de un observador, esta implementado de manera circular para la reproduccion normal
+     * @return Retorna el elemento que esta inmediatamente antes del observer, utilizado para la reproduccion de musica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     * */
     public T getBackItemNotLoop(){
         DoublyNode<T>Temp = head;
         if (observer != getNode(0) && observer != getNode(1) && observer != tail){

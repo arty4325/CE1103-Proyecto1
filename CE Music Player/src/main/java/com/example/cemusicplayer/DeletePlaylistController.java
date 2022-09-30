@@ -14,15 +14,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
+/**
+ * Controlador que permite borrar listas de reproduccion
+ */
 public class DeletePlaylistController implements Initializable {
 
     private Stage stage;
@@ -52,16 +52,15 @@ public class DeletePlaylistController implements Initializable {
 
     }
 
-
+    /**
+     * El metodo permite borrar la carpeta de la playlist, para hacer esto primero hay que vaciar la playlist
+     * @throws FileNotFoundException
+     * @autho Programiz https://www.programiz.com/java-programming/examples/delete-directory#:~:text=In%20Java%2C%20to%20delete%20a,we%20can%20delete%20the%20directory.&text=In%20the%20above%20example%2C%20we%20have%20used%20the%20for%2Deach,files%20present%20in%20the%20directory.
+     */
     @FXML
     void Delete(ActionEvent event) throws FileNotFoundException {
-
         // https://www.programiz.com/java-programming/examples/delete-directory#:~:text=In%20Java%2C%20to%20delete%20a,we%20can%20delete%20the%20directory.&text=In%20the%20above%20example%2C%20we%20have%20used%20the%20for%2Deach,files%20present%20in%20the%20directory.
         if (ChoosedPlaylist != null){
-            //System.out.println(ChoosedPlaylist);
-            //File FileToBeDeletedMP3 = new File("Users/" + SignInController.getEmail() + "/" + ChoosedPlaylist);
-            //System.out.println(FileToBeDeletedMP3);
-            //FileToBeDeletedMP3.delete();
             try {
                 // create a new file object
                 File directory = new File("Users/" + SignInController.getEmail() + "/" + ChoosedPlaylist);

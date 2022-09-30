@@ -19,6 +19,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador de la pantalla que permite borrar canciones de las listas de reproduccion
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class DeleteMusicController implements Initializable {
     private Stage stage;
     private Scene scene;
@@ -28,6 +32,10 @@ public class DeleteMusicController implements Initializable {
     @FXML
     private ComboBox<String> Song;
 
+    /**
+     * Lee el arhcivo de texto que contiene el registro de las listas de reproduccion y lo carga en el combo box
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void ChoosePlaylist(ActionEvent event) {
         System.out.println(Playlist.getSelectionModel().getSelectedItem());
@@ -51,28 +59,23 @@ public class DeleteMusicController implements Initializable {
 
     }
 
+    /**
+     * Permite borrar el nombre de la cancion de un archivo .txt
+     * @param event
+     * @throws FileNotFoundException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556 Karthik Balakrishnan https://stackoverflow.com/questions/13729625/overwriting-txt-file-in-java
+     */
     @FXML
     void DeleteSong(ActionEvent event) throws FileNotFoundException {
-        System.out.println(Playlist.getSelectionModel().getSelectedItem());
-        System.out.println(Song.getSelectionModel().getSelectedItem());
         File FileToBeDeletedMP3 = new File("Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem() + "/" + Song.getSelectionModel().getSelectedItem());
         File FileToBeDeletedXML = new File("Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem() + "/" + Song.getSelectionModel().getSelectedItem() + ".xml");
         FileToBeDeletedMP3.delete();
         FileToBeDeletedXML.delete();
         LinkedList<String> list = new LinkedList<>();
         list = FileInList.LoadFileOfStringsIntoList(new File("Users/" + SignInController.getEmail() + "/" + Playlist.getSelectionModel().getSelectedItem() + "/LoadedSongs.txt"));
-
-
-        System.out.println("Before Deleting");
-        System.out.println(Song.getSelectionModel().getSelectedItem());
-
         int Number;
         Number = list.IndexOfItem(Song.getSelectionModel().getSelectedItem());
-        System.out.println(Number);
-
         list.delete(Number);
-        System.out.println(list.getSize());
-        System.out.println("Algo443" + list.get(list.getSize() - 1));
         ListInFile.CreateFileWithListInfo(list, "Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem() + "/LoadedSongs.txt");
     }
 

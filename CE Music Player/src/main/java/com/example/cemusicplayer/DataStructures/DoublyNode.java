@@ -1,7 +1,11 @@
 package com.example.cemusicplayer.DataStructures;
 
-
-    public class DoublyNode<T> {
+/**
+ * Implementacion del nodo doblemente enlazado que es utilizado en la lista doblemente enlazada circular
+ * @param <T> El objeto que se le asigna al nodo
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
+public class DoublyNode<T> {
         private T data;
         private DoublyNode<T> next;
         private DoublyNode<T> back;

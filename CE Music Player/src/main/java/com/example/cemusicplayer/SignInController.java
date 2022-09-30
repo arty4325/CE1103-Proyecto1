@@ -19,6 +19,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Controlador de la lista de reproduccion que permite Iniciar Sesion en la plataforma
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class SignInController {
     private Stage stage;
     private Scene scene;
@@ -43,14 +47,20 @@ public class SignInController {
         return Email;
     }
 
-    public void Login(ActionEvent event)throws IOException {
+    public void Login(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Metodo que permite ingresar a la plataforma en caso de que los datos ingresados en los entrys sean correctos
+     * @param event
+     * @throws IOException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void SignInPlatfom(MouseEvent event) throws IOException {
         Email = EmailEntry.getText();
@@ -58,12 +68,10 @@ public class SignInController {
         Passwords = passwordsEntry.getText();
         File Dir = new File("Users/" + Email);
         if (Dir.exists()){
-            // Se revisa el archivo .txt que esta dentro del directorio
             File InfoFile = new File("Users/" + Email + "/UserInformation.txt");
             LinkedList<String> AccoutInformation = new LinkedList<>();
             AccoutInformation = FileInList.LoadFileOfStringsIntoList(InfoFile);
             System.out.println(AccoutInformation.get(3));
-            //System.out.println(Password);
             if(Password.equals(AccoutInformation.get(3) )){
                 Parent root = root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MusicPlayerWindow.fxml")));
                 stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

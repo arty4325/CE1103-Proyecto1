@@ -23,7 +23,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-
+/**
+ * Controlador que gestiona la pantalla en la que se reproduce la musica
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class MusicPlayerController implements Initializable {
     @FXML
     private ComboBox<String> Playlist;
@@ -61,7 +64,6 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     private Label Genero;
-
 
 
     @FXML
@@ -103,7 +105,13 @@ public class MusicPlayerController implements Initializable {
     static String ChoosedSong;
     File Metadata;
 
-
+    /**
+     * Haciendo uso de la lista doblemente enlazada circular, este metodo reproduce la cancion anterior dentro de la lista de reproduccion
+     *
+     * @param event
+     * @throws FileNotFoundException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void LastSong(ActionEvent event) throws FileNotFoundException {
         if (PlayingPlaylist != null) {
@@ -144,7 +152,7 @@ public class MusicPlayerController implements Initializable {
 
                 System.out.println(ChoosedSong);
             }
-        }else{
+        } else {
             Alert message = new Alert(Alert.AlertType.WARNING);
             message.setTitle("Advertencia");
             message.setContentText("Por favor elija una playlist");
@@ -153,6 +161,13 @@ public class MusicPlayerController implements Initializable {
         }
     }
 
+    /**
+     * Haciendo uso de la lista doblemente enlazada circular, este metodo reproduce la cancion siguiente dentro de la lista de reproduccion
+     *
+     * @param event
+     * @throws FileNotFoundException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void NextSong(ActionEvent event) throws FileNotFoundException {
         if (PlayingPlaylist != null) {
@@ -191,7 +206,7 @@ public class MusicPlayerController implements Initializable {
                 label.setText(ChoosedSong);
                 System.out.println(ChoosedSong);
             }
-        }else{
+        } else {
             Alert message = new Alert(Alert.AlertType.WARNING);
             message.setTitle("Advertencia");
             message.setContentText("Por favor elija una playlist");
@@ -203,51 +218,61 @@ public class MusicPlayerController implements Initializable {
     @FXML
     void LSongs(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("CreatePlaylist.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
+
     @FXML
     void AddMusic(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddMusicMenu.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
+
     @FXML
     void DeleteMusic(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("DeleteMusicMenu.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
+
+    /**
+     * Si la cancion que se esta reproduciendo esta en favoritos, este metodo permite borrarla de ese registro
+     *
+     * @param event
+     * @throws FileNotFoundException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void DeleteFavourite(ActionEvent event) throws FileNotFoundException {
-        if (PlayingPlaylist != null){
+        if (PlayingPlaylist != null) {
 
             LinkedList<String> list = new LinkedList<>();
             list = FileInList.LoadFileOfStringsIntoList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/FavoriteSongs.txt"));
             int Number;
             Number = list.IndexOfItem(String.valueOf(label));
-            if (boolFavorite(String.valueOf(label))==true){
+            if (boolFavorite(String.valueOf(label)) == true) {
                 list.delete(Number);
                 ListInFile.CreateFileWithListInfo(list, "Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
                 fondoFavorito.setVisible(false);
 
-            }else{
+            } else {
                 Alert message = new Alert(Alert.AlertType.WARNING);
                 message.setTitle("Advertencia");
                 message.setContentText("Esta cancion no esta en favoritos");
                 message.showAndWait();
             }
 
-        }else{
+        } else {
             Alert message = new Alert(Alert.AlertType.WARNING);
             message.setTitle("Advertencia");
             message.setContentText("Por favor elija una playlist");
@@ -259,7 +284,7 @@ public class MusicPlayerController implements Initializable {
     void Edit(ActionEvent event) throws IOException {
         player.stop();
         Parent root = FXMLLoader.load(getClass().getResource("EditMetadata.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
@@ -267,12 +292,12 @@ public class MusicPlayerController implements Initializable {
     }
 
 
-    public void Pause(){
+    public void Pause() {
         if (PlayingPlaylist != null) {
             PlayButton.setDisable(false);
             player.pause();
             PauseButton.setDisable(true);
-        }else{
+        } else {
             Alert message = new Alert(Alert.AlertType.WARNING);
             message.setTitle("Advertencia");
             message.setContentText("Por favor elija una playlist");
@@ -281,14 +306,14 @@ public class MusicPlayerController implements Initializable {
 
     }
 
-    public void play(){
+    public void play() {
 
 
         if (PlayingPlaylist != null) {
             PauseButton.setDisable(false);
             player.play();
             PlayButton.setDisable(true);
-        }else{
+        } else {
             Alert message = new Alert(Alert.AlertType.WARNING);
             message.setTitle("Advertencia");
             message.setContentText("Por favor elija una playlist");
@@ -296,29 +321,35 @@ public class MusicPlayerController implements Initializable {
 
         }
     }
-    public void volumeDown(Double d){
-        Mixer.Info [] mixers= AudioSystem.getMixerInfo();
-        for(Mixer.Info mixerInfo : mixers){
+
+    /**
+     * Este metodo permite bajar el volumen de una cancion
+     *
+     * @author JobME Tech Solutions https://www.youtube.com/watch?v=Wn4CAwShUvk, Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
+    public void volumeDown(Double d) {
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        for (Mixer.Info mixerInfo : mixers) {
             Mixer mixer = AudioSystem.getMixer(mixerInfo);
-            Line.Info[] lineInfo=mixer.getTargetLineInfo();
-            for(Line.Info lineI:lineInfo){
-                Line line =null;
+            Line.Info[] lineInfo = mixer.getTargetLineInfo();
+            for (Line.Info lineI : lineInfo) {
+                Line line = null;
                 boolean open = true;
-                try{
-                    line=mixer.getLine(lineI);
-                    open=line.isOpen() || line instanceof Clip;
-                    if(!open){
+                try {
+                    line = mixer.getLine(lineI);
+                    open = line.isOpen() || line instanceof Clip;
+                    if (!open) {
                         line.open();
                     }
                     FloatControl controlV = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
-                    float current=controlV.getValue();
-                    Double volumeC=d;
-                    float change=(float) ((float)current-(double)volumeC);
+                    float current = controlV.getValue();
+                    Double volumeC = d;
+                    float change = (float) ((float) current - (double) volumeC);
                     controlV.setValue(change);
                 } catch (LineUnavailableException lineUnavailableException) {
-                }catch (IllegalArgumentException illegalArgumentException){
-                }finally {
-                    if(line!=null && !open){
+                } catch (IllegalArgumentException illegalArgumentException) {
+                } finally {
+                    if (line != null && !open) {
                         line.close();
                     }
                 }
@@ -326,29 +357,35 @@ public class MusicPlayerController implements Initializable {
         }
 
     }
-    public void volumeUp(Double d){
-        Mixer.Info [] mixers= AudioSystem.getMixerInfo();
-        for(Mixer.Info mixerInfo : mixers){
+
+    /**
+     * Este metodo permite subir el volumen de una cancion
+     *
+     * @author JobME Tech Solutions https://www.youtube.com/watch?v=Wn4CAwShUvk, Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
+    public void volumeUp(Double d) {
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        for (Mixer.Info mixerInfo : mixers) {
             Mixer mixer = AudioSystem.getMixer(mixerInfo);
-            Line.Info[] lineInfo=mixer.getTargetLineInfo();
-            for(Line.Info lineI:lineInfo){
-                Line line =null;
+            Line.Info[] lineInfo = mixer.getTargetLineInfo();
+            for (Line.Info lineI : lineInfo) {
+                Line line = null;
                 boolean open = true;
-                try{
-                    line=mixer.getLine(lineI);
-                    open=line.isOpen() || line instanceof Clip;
-                    if(!open){
+                try {
+                    line = mixer.getLine(lineI);
+                    open = line.isOpen() || line instanceof Clip;
+                    if (!open) {
                         line.open();
                     }
                     FloatControl controlV = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
-                    float current=controlV.getValue();
-                    Double volumeC=d;
-                    float change=(float) ((float)current+(double)volumeC);
+                    float current = controlV.getValue();
+                    Double volumeC = d;
+                    float change = (float) ((float) current + (double) volumeC);
                     controlV.setValue(change);
                 } catch (LineUnavailableException lineUnavailableException) {
-                }catch (IllegalArgumentException illegalArgumentException){
-                }finally {
-                    if(line!=null && !open){
+                } catch (IllegalArgumentException illegalArgumentException) {
+                } finally {
+                    if (line != null && !open) {
                         line.close();
                     }
                 }
@@ -356,38 +393,53 @@ public class MusicPlayerController implements Initializable {
         }
 
     }
-    public void Up(){
+
+    public void Up() {
         volumeUp(0.2);
     }
-    public void down(){
+
+    public void down() {
         volumeDown(0.2);
     }
 
+    /**
+     * El presente metodo permite buscar si una cancion esta en la lista de favoritos para poner el label que se necesita en pantalla
+     *
+     * @param song Nombre de la cancion que se esta reproduciendo y que se quiere revisar que este en favoritos
+     * @return
+     * @throws FileNotFoundException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public Void SearchFavorite(String song) throws FileNotFoundException {
-
         Scanner favorite = new Scanner(song);
         String cancion = favorite.next();
         String email = SignInController.getEmail();
         File file = new File("Users/" + email + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
         Scanner scanner;
-
-
         scanner = new Scanner(file);
         while (scanner.hasNext()) {
             final String lineFromFile = scanner.nextLine();
             if (lineFromFile.contains(cancion)) {
-                F=true;
+                F = true;
                 fondoFavorito.setVisible(F);
                 break;
 
-            }else{
-                F=false;
+            } else {
+                F = false;
                 fondoFavorito.setVisible(F);
             }
         }
         return null;
     }
 
+    /**
+     * Devuelve un valor booleano dependiendo de si la cancion que se esta reproduciendo esta en favoritos o no
+     *
+     * @param song El nombre de la cancion que se quiere revisar si esta en favoritos
+     * @return true si la cancion esta en favoritos y false si no lo esta
+     * @throws FileNotFoundException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public Boolean boolFavorite(String song) throws FileNotFoundException {
         Scanner favorite = new Scanner(song);
         String cancion = favorite.next();
@@ -403,6 +455,13 @@ public class MusicPlayerController implements Initializable {
         }
         return false;
     }
+
+    /**
+     * Permite agregar la cancion que se esta reproduciendo a la lista de favoritos si el usuario presiona el boton
+     * @param event
+     * @throws IOException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void AddFavorite(ActionEvent event) throws IOException {
         String Email = SignInController.getEmail();
@@ -427,7 +486,13 @@ public class MusicPlayerController implements Initializable {
         fondoFavorito.setVisible(true);
     }
 
-        @FXML
+    /**
+     * Le permite al usuario seleccionar la lista de reproduccion que este desea escuchar
+     * @param event
+     * @throws FileNotFoundException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
+    @FXML
     void PlaylistChooser(ActionEvent event) throws FileNotFoundException {
         String selected = Playlist.getSelectionModel().getSelectedItem();
         PlayingPlaylist = selected;
@@ -456,20 +521,19 @@ public class MusicPlayerController implements Initializable {
             num.setText("Canciones: " + numSongs());
             size = LoadedPlaylist.getSize();
 
-
-
-        }else{
+        }else {
             Alert message = new Alert(Alert.AlertType.WARNING);
             message.setTitle("Advertencia");
             message.setContentText("Por favor agregue canciones a su playlist");
             message.showAndWait();
-
-
-
         }
-
     }
 
+    /**
+     * Permite poner o quitar la lista de reproduccion en el modo reproduccion continua
+     * @param event
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void Loop(ActionEvent event)  {
         if (PlayingPlaylist != null) {
@@ -537,8 +601,6 @@ public class MusicPlayerController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/ExistingPlaylist.txt");

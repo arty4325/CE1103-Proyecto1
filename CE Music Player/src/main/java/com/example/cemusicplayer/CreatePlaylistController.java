@@ -1,7 +1,6 @@
 package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.DCLinkedList;
-import com.example.cemusicplayer.InformationManager.FileInList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +10,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
+/**
+ * Controlador de la pantalla que permite crear listas de reproduccion
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class CreatePlaylistController {
 
     private static DCLinkedList<String> LoadedPlaylist;
@@ -45,7 +50,11 @@ public class CreatePlaylistController {
         return String.valueOf(localDate);
     }
 
-
+    /**
+     * Permite la creacion de listas de reproduccion, crea una carpeta que contendra todos los archivos de la lista
+     * @throws IOException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void CreatePlaylist(ActionEvent event) throws IOException {
         NameOfPlaylist = NameOfEntry.getText();
@@ -54,11 +63,6 @@ public class CreatePlaylistController {
         File Dir = new File("Users/" + Email + "/" + NameOfPlaylist);
         localTime = LocalTime.now();
         localDate = LocalDate.now();
-
-
-
-
-
         if(!Dir.exists()){
             Dir.mkdirs();
             File ExistingPlaylists = new File("Users/" + Email + "/ExistingPlaylist.txt");
@@ -69,10 +73,13 @@ public class CreatePlaylistController {
             Playlistbw.close();
             PlaylistFileWriter.close();
         }
-
-
     }
 
+    /**
+     * Permite guardar la fecha en la cual fue creada la lista de reproduccion para desplegarla en la pantalla
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     * @throws IOException
+     */
     public static void SaveDate() throws IOException {
         String time;
         String Email = SignInController.getEmail();

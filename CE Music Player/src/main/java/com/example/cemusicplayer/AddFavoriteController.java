@@ -2,7 +2,6 @@ package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
-import com.example.cemusicplayer.InformationManager.FileLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +17,10 @@ import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Conrolador de la pantalla que registra canciones como favoritas
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class AddFavoriteController implements Initializable {
     private Stage stage;
     private Scene scene;
@@ -38,11 +41,10 @@ public class AddFavoriteController implements Initializable {
     private String DestPLaylist;
 
 
-
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MusicPlayerWindow.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -71,6 +73,11 @@ public class AddFavoriteController implements Initializable {
         ChoosedPlaylist = Playlist.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * Agrega una cancion a favoritos
+     * @throws IOException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void addFavorite(ActionEvent event) throws IOException {
         String Email = SignInController.getEmail();

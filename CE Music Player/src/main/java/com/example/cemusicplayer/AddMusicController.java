@@ -19,6 +19,10 @@ import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador de la pantalla que permite agregar musica
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class AddMusicController implements Initializable {
     private Stage stage;
     private Scene scene;
@@ -49,6 +53,11 @@ public class AddMusicController implements Initializable {
     private String NameOfYear;
     private String NameOfAlbum;
 
+    /**
+     * Metodo que permite buscar la cancion con el buscador de archivos de windows
+     * @throws IOException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void SearchSong(ActionEvent event) throws IOException {
 

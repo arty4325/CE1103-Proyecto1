@@ -2,7 +2,6 @@ package com.example.cemusicplayer;
 
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
-import com.example.cemusicplayer.InformationManager.FileLoader;
 import com.example.cemusicplayer.MusicManager.XMLController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +20,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador que permite editar la metadata de una cancion
+ */
 public class EditMetadata implements Initializable {
 
     private Stage stage;
@@ -59,13 +61,6 @@ public class EditMetadata implements Initializable {
     private String ChoosedSong;
     private String ChoosedPlaylist;
 
-
-
-
-
-
-
-
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MusicPlayerWindow.fxml"));
@@ -75,23 +70,20 @@ public class EditMetadata implements Initializable {
         stage.show();
     }
 
+    /**
+     * Toma la informacin dada en los text fields y intancia XMLController para sobrescribirla en el archivo xml
+     * @param event
+     * @throws IOException
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void Save(ActionEvent event) throws IOException {
-
-
-
-
-
         genero= Genero.getText();
         artista=Artista.getText();
         album=Album.getText();
         year=Year.getText();
         letra=Letra.getText();
         XMLController.creator(NameOfSong,genero,artista,album,year,letra,"Users/" + SignInController.getEmail() + "/" + ChoosedPlaylist + "/" + ChoosedSong+".xml");;
-
-
-
-
     }
     @FXML
     void PlaylistChooser(ActionEvent event) {
@@ -107,7 +99,6 @@ public class EditMetadata implements Initializable {
                 Song.getItems().add(list.getNext());
             }
         }
-
     }
 
     @FXML

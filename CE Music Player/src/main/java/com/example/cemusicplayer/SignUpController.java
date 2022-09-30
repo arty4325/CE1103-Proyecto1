@@ -16,13 +16,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Clase que permite registrarse en la plataforma, creando un archivo .txt
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class SignUpController implements Initializable {
     private Stage stage;
     private Scene scene;
@@ -55,8 +56,6 @@ public class SignUpController implements Initializable {
         Password = password.getText();
         Username = UserName.getText();
         SignUpUser.CreateUserFolder(Email, Username, Province, Password);
-
-
     }
 
     public void Login(ActionEvent event)throws IOException {
