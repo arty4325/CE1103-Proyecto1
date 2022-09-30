@@ -34,7 +34,7 @@ public class Arduino extends Thread{
                 event.getSerialPort().readBytes(buffer, size);
                 String Temp = "";
                 for (byte b :buffer){
-                    System.out.println((char)b);
+                    System.out.print((char)b);
                 }
             }
 

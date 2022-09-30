@@ -38,21 +38,6 @@ public class LinkedList<T> {
             return null;
         }
     }
-    public T getNext2(){
-        SimpleNode<T> Temp = head;
-        if(secondObserver == head){
-            secondObserver = secondObserver.getNext();
-            return get(0);
-        } else if (secondObserver != null){
-            Temp = secondObserver;
-            secondObserver = secondObserver.getNext();
-            return Temp.getData();
-        } else {
-            return null;
-        }
-    }
-
-
 
     public T add(T data){
         SimpleNode<T> node = head;
