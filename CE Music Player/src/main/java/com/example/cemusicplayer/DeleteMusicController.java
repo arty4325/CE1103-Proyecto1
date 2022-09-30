@@ -73,8 +73,6 @@ public class DeleteMusicController implements Initializable {
         list.delete(Number);
         System.out.println(list.getSize());
         System.out.println("Algo443" + list.get(list.getSize() - 1));
-
-
         ListInFile.CreateFileWithListInfo(list, "Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem() + "/LoadedSongs.txt");
     }
 

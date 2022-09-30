@@ -3,6 +3,7 @@ package com.example.cemusicplayer;
 import com.example.cemusicplayer.DataStructures.DCLinkedList;
 import com.example.cemusicplayer.DataStructures.LinkedList;
 import com.example.cemusicplayer.InformationManager.FileInList;
+import com.example.cemusicplayer.InformationManager.ListInFile;
 import com.example.cemusicplayer.MusicManager.XMLController;
 import jaco.mp3.player.MP3Player;
 import javafx.event.ActionEvent;
@@ -37,7 +38,8 @@ public class MusicPlayerController implements Initializable {
 
     @FXML
     private Button NextButton;
-
+    @FXML
+    private Button ErraseFavourite;
     @FXML
     private Button FavoriteButton;
 
@@ -223,6 +225,17 @@ public class MusicPlayerController implements Initializable {
         stage.show();
     }
     @FXML
+    void DeleteFavourite(ActionEvent event) throws FileNotFoundException {
+        LinkedList<String> list = new LinkedList<>();
+        list = FileInList.LoadFileOfStringsIntoList(new File("Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/FavoriteSongs.txt"));
+        int Number;
+        Number = list.IndexOfItem(String.valueOf(label));
+
+        list.delete(Number);
+        ListInFile.CreateFileWithListInfo(list, "Users/" + SignInController.getEmail() + "/" + PlayingPlaylist + "/FavoriteSongs.txt");
+    }
+
+    @FXML
     void Edit(ActionEvent event) throws IOException {
         player.stop();
         Parent root = FXMLLoader.load(getClass().getResource("EditMetadata.fxml"));
@@ -350,13 +363,8 @@ public class MusicPlayerController implements Initializable {
             }else{
                 F=false;
                 fondoFavorito.setVisible(F);
-
             }
-
-
         }
-
-
         return null;
     }
 
@@ -495,7 +503,6 @@ public class MusicPlayerController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-
     }
 
 
@@ -513,7 +520,5 @@ public class MusicPlayerController implements Initializable {
                 Playlist.getItems().add(list.getNext());
             }
         }
-
-
     }
 }
