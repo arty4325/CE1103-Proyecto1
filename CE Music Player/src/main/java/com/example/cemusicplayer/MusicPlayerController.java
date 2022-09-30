@@ -327,7 +327,7 @@ public class MusicPlayerController implements Initializable {
      *
      * @author JobME Tech Solutions https://www.youtube.com/watch?v=Wn4CAwShUvk, Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
-    public void volumeDown(Double d) {
+    public static void volumeDown(Double d) {
         Mixer.Info[] mixers = AudioSystem.getMixerInfo();
         for (Mixer.Info mixerInfo : mixers) {
             Mixer mixer = AudioSystem.getMixer(mixerInfo);
@@ -363,7 +363,7 @@ public class MusicPlayerController implements Initializable {
      *
      * @author JobME Tech Solutions https://www.youtube.com/watch?v=Wn4CAwShUvk, Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
-    public void volumeUp(Double d) {
+    public static void volumeUp(Double d) {
         Mixer.Info[] mixers = AudioSystem.getMixerInfo();
         for (Mixer.Info mixerInfo : mixers) {
             Mixer mixer = AudioSystem.getMixer(mixerInfo);
@@ -397,6 +397,7 @@ public class MusicPlayerController implements Initializable {
     public void Up() {
         volumeUp(0.2);
     }
+
 
     public void down() {
         volumeDown(0.2);
