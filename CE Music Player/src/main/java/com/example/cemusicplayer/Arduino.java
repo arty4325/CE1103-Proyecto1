@@ -39,7 +39,7 @@ public class Arduino extends Thread {
             line = scanner.nextLine();
             String[] bytes = line.split(",");
             //System.out.println(Arrays.toString(bytes));
-            if (bytes.length >= 5) {
+            if (bytes.length >= 10) {
                 if (Objects.equals(bytes[0], "1") && Objects.equals(bytes[1], "0")) {
                     if (!Flag1) {
                         System.out.println("Primer Caso");
@@ -128,9 +128,26 @@ public class Arduino extends Thread {
                         //MusicPlayerController.volumeDown(0.2);
                     }
                 }
+                if (Objects.equals(bytes[5], "1")){
+                    System.out.println("Funciona next");
+;                }
+                if (Objects.equals(bytes[6], "1")){
+                    System.out.println("Funciona back");
+                }
+                if (Objects.equals(bytes[7], "1")){
+                    System.out.println("Funciona el play");
+                }
+                if (Objects.equals(bytes[8], "1")){
+                    System.out.println("Funciona pausa");
+                }
+                if (Objects.equals(bytes[9], "1")){
+                    System.out.println("Funciona Loop");
+                }
+                if (Objects.equals(bytes[10], "1")){
+                    System.out.println("Funciona Fav");
+                }
+
             }
         }
     }
 }
-
-

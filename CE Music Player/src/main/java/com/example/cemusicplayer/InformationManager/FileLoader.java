@@ -3,46 +3,42 @@ package com.example.cemusicplayer.InformationManager;
 import javafx.stage.FileChooser;
 
 import java.io.*;
-
+/**
+ * Clase para cargar archivos
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class FileLoader {
     /**
-     * Permite copiar un archivo del computador en una direccion dada, utilizado para crear las listas de reproduccion
-     * @param source El archivo que se esta copiando
-     * @param dest El destino del archivo que se quiere copiar
-     * @throws IOException
-     * @author Pankaj https://www.digitalocean.com/community/tutorials/java-copy-file
+     * Metodo para copiar archivos en una ruta especifica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static void copyFileUsingStream(File source, File dest) throws IOException {
         InputStream is = null;
         OutputStream os = null;
         try {
-            is = new FileInputStream(source);
-            os = new FileOutputStream(dest);
+            is = new FileInputStream(source);//Se agrega al flujo de entrada de archivo el archivo fuente
+            os = new FileOutputStream(dest);//Se agrega al flujo de entrada de archivo el archivo de destino
             byte[] buffer = new byte[1024];
             int length;
             while ((length = is.read(buffer)) > 0) {
-                os.write(buffer, 0, length);
+                os.write(buffer, 0, length);//Se escribe en el archivo de destino
             }
         } finally {
             is.close();
             os.close();
         }
     }
-
     /**
-     * Funcion que se encarga de instanciar copyFileUsingStream
-     * @param Email La direccion de correo del usuario que esta ingresando la cancion
-     * @param Playlist La playlist en la que se quiere ingresar la cancion
-     * @return El nombre del archivo que se esta ingresando en la playlist
-     * @throws IOException
-     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556, Pankaj
+     * Metodo para cargar las canciones en la carpeta de la playlist
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static String SongLoader(String Email, String Playlist) throws IOException {
         FileChooser fc = new FileChooser();
-        File selectedFile = fc.showOpenDialog(null);
+        File selectedFile = fc.showOpenDialog(null);//Se abre una ventana para que el usuario elija la cancion desde el explorador de archivo
+        System.out.println(selectedFile);
         File UserFile = new File("Users/" + Email + "/" + Playlist + "/" + selectedFile.getName());
         FileWriter file = new FileWriter("Users/" + Email + "/" + Playlist + "/" + selectedFile.getName(), true);
-        copyFileUsingStream(selectedFile, UserFile);
+        copyFileUsingStream(selectedFile, UserFile);//Se llama al metodo para copiar el archivo de la cancion en la ruta definida
         return selectedFile.getName();
     }
 }

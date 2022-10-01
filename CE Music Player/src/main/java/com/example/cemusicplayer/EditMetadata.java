@@ -19,9 +19,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 /**
- * Controlador que permite editar la metadata de una cancion
+ * Controlador de la pantalla editar metadata
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
  */
 public class EditMetadata implements Initializable {
 
@@ -61,6 +61,16 @@ public class EditMetadata implements Initializable {
     private String ChoosedSong;
     private String ChoosedPlaylist;
 
+
+
+
+
+
+
+    /**
+     * Metodo para regresar a la pantalla de reproduccion de musica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MusicPlayerWindow.fxml"));
@@ -69,38 +79,54 @@ public class EditMetadata implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
     /**
-     * Toma la informacin dada en los text fields y intancia XMLController para sobrescribirla en el archivo xml
-     * @param event
-     * @throws IOException
+     * Metodo para editar la metadata de la cancion y guardar esos cambios
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     @FXML
     void Save(ActionEvent event) throws IOException {
+
+
+
+
+
         genero= Genero.getText();
         artista=Artista.getText();
         album=Album.getText();
         year=Year.getText();
         letra=Letra.getText();
         XMLController.creator(NameOfSong,genero,artista,album,year,letra,"Users/" + SignInController.getEmail() + "/" + ChoosedPlaylist + "/" + ChoosedSong+".xml");;
+
+
+
+
     }
+    /**
+     * Metodo para mostrar las canciones de una playlist en un comboBox
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void PlaylistChooser(ActionEvent event) {
         File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem() + "/LoadedSongs.txt");
         LinkedList<String> list = new LinkedList<>();
         try {
-            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);
+            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);//Se coloca en lista simplemente enlazada el archivo de LoadedSongs
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        //Se revisa si lista es mayor a 0
         if (list.getSize() > 0){
+            //Se agrega el nombre de la canciont mientras i sea menor al largo de la lista
             for(int i = 0; i < list.getSize(); i++){
-                Song.getItems().add(list.getNext());
+                Song.getItems().add(list.getNext());//Se obtiene el nombre de la cancion y se agrega a la lista
             }
         }
-    }
 
+    }
+    /**
+     * Metodo para dectectar la cancion seleccionada
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void SongChooser(ActionEvent event) {
         ChoosedSong = Song.getSelectionModel().getSelectedItem();
@@ -110,19 +136,24 @@ public class EditMetadata implements Initializable {
 
     }
 
-
+    /**
+     * Metodo para mostrar las canciones de cada playlist en un comboBox
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/ExistingPlaylist.txt");
         LinkedList<String> list = new LinkedList<>();
         try {
-            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);
+            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);//Se coloca en lista simplemente enlazada el archivo de playlist existente
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        //Se revisa si lista es mayor a 0
         if (list.getSize() > 0){
+            //Se agrega el nombre de la playlist mientras i sea menor al largo de la lista
             for(int i = 0; i < list.getSize(); i++){
-                Playlist.getItems().add(list.getNext());
+                Playlist.getItems().add(list.getNext());//Se obtiene el nombre de la playliist y se agrega a la lista
             }
         }
     }

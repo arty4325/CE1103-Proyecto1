@@ -17,10 +17,12 @@ import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 /**
- * Conrolador de la pantalla que registra canciones como favoritas
+ * Controlador de la pantalla que registra canciones como favoritas
  * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
  */
+
 public class AddFavoriteController implements Initializable {
     private Stage stage;
     private Scene scene;
@@ -41,41 +43,52 @@ public class AddFavoriteController implements Initializable {
     private String DestPLaylist;
 
 
+    /**
+     * Metodo para regresar a la pantalla de reproduccion de musica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("MusicPlayerWindow.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Metodo para mostrar las canciones de cada playlist en un comboBox
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void PlaylistChooser(ActionEvent event) {
         File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/"+ Playlist.getSelectionModel().getSelectedItem() + "/LoadedSongs.txt");
         LinkedList<String> list = new LinkedList<>();
         try {
-            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);
+            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);//Se coloca en lista simplemente enlazada el archivo de LoadedSongs
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        //Se revisa si lista es mayor a 0
         if (list.getSize() > 0){
+            //Se agrega el nombre de la canciont mientras i sea menor al largo de la lista
             for(int i = 0; i < list.getSize(); i++){
-                Song.getItems().add(list.getNext());
+                Song.getItems().add(list.getNext());//Se obtiene el nombre de la cancion y se agrega a la lista
             }
         }
 
     }
-
+    /**
+     * Metodo para detectar la cancion selecciona desde el comboBox
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @FXML
     void SongChooser(ActionEvent event) {
         ChoosedSong = Song.getSelectionModel().getSelectedItem();
         ChoosedPlaylist = Playlist.getSelectionModel().getSelectedItem();
     }
-
     /**
-     * Agrega una cancion a favoritos
-     * @throws IOException
+     * Metodo para guardar el nombre de la cancion al txt llamado favoriteSongs
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     @FXML
@@ -108,19 +121,24 @@ public class AddFavoriteController implements Initializable {
 
     }
 
-
+    /**
+     * Metodo para mostrar las playlist del usuario en un comboBox
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File ExistingPlaylist = new File("Users/" + SignInController.getEmail() + "/ExistingPlaylist.txt");
         LinkedList<String> list = new LinkedList<>();
         try {
-            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);
+            list = FileInList.LoadFileOfStringsIntoList(ExistingPlaylist);//Se coloca en lista simplemente enlazada el archivo de playlist existente
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        //Se revisa si lista es mayor a 0
         if (list.getSize() > 0){
+            //Se agrega el nombre de la playlist mientras i sea menor al largo de la lista
             for(int i = 0; i < list.getSize(); i++){
-                Playlist.getItems().add(list.getNext());
+                Playlist.getItems().add(list.getNext());//Se obtiene el nombre de la playliist y se agrega a la lista
             }
         }
     }

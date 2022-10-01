@@ -8,9 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
 /**
- * Controlador que permite gestionar el ingreso de usuarios en la plataforma
+ * Controlador de la pantalla que muestras las dos opciones o un boton para iniciar sesion o registrarse
  * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
  */
 public class LoginController {
@@ -19,9 +18,7 @@ public class LoginController {
     private Parent root;
 
     /**
-     * Funcion que redirigue a la pantalla de registro
-     * @param event
-     * @throws IOException
+     * Metodo para abrir la pantalla de inicio de seccion
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public void SignUp(ActionEvent event) throws IOException {
@@ -31,11 +28,10 @@ public class LoginController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
     }
     /**
-     * Funcion que redirigue a la pantalla de inicio de sesion
-     * @param event
-     * @throws IOException
+     * Metodo para abrir la pantalla de registrarse
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public void SignIn(ActionEvent event)throws IOException{
@@ -45,6 +41,7 @@ public class LoginController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
     }
 
 

@@ -14,30 +14,31 @@ import java.io.IOException;
 import java.util.List;
 
 
+
+
 /**
- * Controlador del archivo XML, permite hacer todas las manipulaciones necesarias
- * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556, DiscoDurodeRoer https://www.youtube.com/watch?v=Hlo_Fw3UXt0
+ * clase para la creacion del xml con la metadta de cada cancion y obtener por partes la metadata
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
  */
 public class XMLController {
 
     private static String PlayingPlaylist;
 
+
     /**
-     * @param Song   La cancion que se quiere agregar al xml
-     * @param Genre  El genero de la cancion que se quiere agregar
-     * @param Artist El Artista de la cancion que se quiere agregar
-     * @param Album  El Album de la cancion que se quiere agregar
-     * @param Year   El Año de la cancion que se quiere agregar
-     * @param Lyrics La letra de la cancion que se quiere agregar
-     * @param Path   La direccion del archivo de la cancion que se quiere agregar
-     * @throws IOException
-     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556, DiscoDurodeRoer
+     * Metodo para creacion de los xml
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static void creator(String Song, String Genre, String Artist, String Album, String Year, String Lyrics, String Path) throws IOException {
         Element PlaylistMetadata = new Element("Metadata");
         Document doc = new Document(PlaylistMetadata);
+
+
+        // para cada objeto se tiene que ir haciendo lo siguiente
         Element Songs = new Element("Songs");
         PlaylistMetadata.addContent(Songs); // este es tu hijo
+
+        // Song 1
         Element ChoosedSong = new Element("Song");
         Element ChoosedGenre = new Element("Genero");
         Element ChoosedArtist = new Element("Artist");
@@ -56,89 +57,148 @@ public class XMLController {
         Songs.addContent(ChoosedYear);
         Songs.addContent(ChoosedLyrics);
         Songs.addContent(ChoosedSong);
+
+
         XMLOutputter xml = new XMLOutputter();
         xml.setFormat(Format.getPrettyFormat()); //  para que no esten todas las lineas juntas
         xml.output(doc, new FileWriter(Path));
     }
 
-    public static String GetGenero(File FILENAME) {
-        String name = "";
-        String data = String.valueOf(FILENAME);
-        try {
+    /**
+     * Metodo para obtener el genero de cada cancion
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
+    public static String GetGenero(File FILENAME){
+        String name="";
+
+        String data= String.valueOf(FILENAME);
+
+
+        try{
             SAXBuilder sax = new SAXBuilder();
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");//Se establece la propiedad para que se restrinja el acceso a DTD externos y referencias de entidades externas a los protocolos especificados
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");//Se restrinje el acceso a los protocolos especificados para referencia externa establecida por el atributo schemaLocation, elemento Importar e Incluir.
+
+
             Document doc = sax.build(new File(data));
+
             Element rootNode = doc.getRootElement();
             List<Element> list = rootNode.getChildren("Songs");
+
             for (Element target : list) {
+
                 name = target.getChildText("Genero");
+
+
+
+
+
             }
+
             return name;
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (JDOMException e) {
             throw new RuntimeException(e);
         }
-    }
 
+    }
     /**
-     * @param FILENAME Nombre del archivo
-     * @return Aritsta de la cancion
-     * @author DiscoDurodeRoer https://www.youtube.com/watch?v=_tHtDjwhkKc, Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     * Metodo para obtener el artista de cada cancion
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static String GetArtist(File FILENAME){
+
         String Artist="";
         String data= String.valueOf(FILENAME);
+
+
         try{
             SAXBuilder sax = new SAXBuilder();
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");//Se establece la propiedad para que se restrinja el acceso a DTD externos y referencias de entidades externas a los protocolos especificados
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");//Se restrinje el acceso a los protocolos especificados para referencia externa establecida por el atributo schemaLocation, elemento Importar e Incluir.
+
+
             Document doc = sax.build(new File(data));
+
             Element rootNode = doc.getRootElement();
             List<Element> list = rootNode.getChildren("Songs");
+
             for (Element target : list) {
+
+
                 Artist = target.getChildText("Artist");
+
+
+
+
+
             }
+
             return Artist;
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (JDOMException e) {
             throw new RuntimeException(e);
         }
+
     }
     /**
-     * @param FILENAME Nombre del archivo
-     * @return Aritsta del album
-     * @author DiscoDurodeRoer https://www.youtube.com/watch?v=_tHtDjwhkKc, Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     * Metodo para obtener el album de cada cancion
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static String GetAlbum(File FILENAME){
+
         String Album="";
         String data= String.valueOf(FILENAME);
+
+
         try{
             SAXBuilder sax = new SAXBuilder();
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+
+
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");//Se establece la propiedad para que se restrinja el acceso a DTD externos y referencias de entidades externas a los protocolos especificados
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");//Se restrinje el acceso a los protocolos especificados para referencia externa establecida por el atributo schemaLocation, elemento Importar e Incluir.
+
             Document doc = sax.build(new File(data));
+
             Element rootNode = doc.getRootElement();
             List<Element> list = rootNode.getChildren("Songs");
+
             for (Element target : list) {
+
+
                 Album = target.getChildText("Album");
+
+
+
+
+
             }
+
             return Album;
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (JDOMException e) {
             throw new RuntimeException(e);
         }
+
     }
     /**
-     * @param FILENAME Nombre del archivo
-     * @return Año de creacion de la cancion
-     * @author DiscoDurodeRoer https://www.youtube.com/watch?v=_tHtDjwhkKc, Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     * Metodo para obtener el año de cada cancion
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static String GetYear(File FILENAME){
-
 
         String Year="";
         String data= String.valueOf(FILENAME);
@@ -148,8 +208,8 @@ public class XMLController {
             SAXBuilder sax = new SAXBuilder();
 
 
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");//Se establece la propiedad para que se restrinja el acceso a DTD externos y referencias de entidades externas a los protocolos especificados
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");//Se restrinje el acceso a los protocolos especificados para referencia externa establecida por el atributo schemaLocation, elemento Importar e Incluir.
 
 
             Document doc = sax.build(new File(data));
@@ -179,9 +239,8 @@ public class XMLController {
 
     }
     /**
-     * @param FILENAME Nombre del archivo
-     * @return Letra de la cancion
-     * @author DiscoDurodeRoer https://www.youtube.com/watch?v=_tHtDjwhkKc, Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     * Metodo para obtener la letra de cada cancion
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static String GetLyrics(File FILENAME){
 
@@ -193,9 +252,8 @@ public class XMLController {
             SAXBuilder sax = new SAXBuilder();
 
 
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");//Se establece la propiedad para que se restrinja el acceso a DTD externos y referencias de entidades externas a los protocolos especificados
+            sax.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");//Se restrinje el acceso a los protocolos especificados para referencia externa establecida por el atributo schemaLocation, elemento Importar e Incluir.
 
             Document doc = sax.build(new File(data));
 

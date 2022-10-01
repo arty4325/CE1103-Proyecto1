@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Controlador de la pantalla que permite crear listas de reproduccion
+ * Controlador de la pantalla que crear nuevas playlist
  * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
  */
 public class CreatePlaylistController {
@@ -36,23 +36,35 @@ public class CreatePlaylistController {
 
     private static String NameOfPlaylist;
 
+    /**
+     * Metodo para obtener el nombre de la playlist
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
+
     public static String getNameOfPlaylist() {
         return NameOfPlaylist;
 
     }
 
+    /**
+     * Metodo para obtener la hora de la creacion de la playlist
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static String getTime() {
         return String.valueOf(localTime);
 
     }
 
+    /**
+     * Metodo para obtener la fecha de la creacion de la playlist
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public static String getDate() {
         return String.valueOf(localDate);
     }
 
     /**
-     * Permite la creacion de listas de reproduccion, crea una carpeta que contendra todos los archivos de la lista
-     * @throws IOException
+     * Metodo que crea una carpeta de archivo que es la playlist y guarda el nombre de la playlist en txt de playlist
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     @FXML
@@ -61,8 +73,13 @@ public class CreatePlaylistController {
         System.out.println(NameOfPlaylist);
         String Email = SignInController.getEmail();
         File Dir = new File("Users/" + Email + "/" + NameOfPlaylist);
-        localTime = LocalTime.now();
-        localDate = LocalDate.now();
+        localTime = LocalTime.now();//Se llama a una clase de java para obtener la hora de la computadora
+        localDate = LocalDate.now();//Se llama a una clase de java para obtener la fecha de la computadora
+
+
+
+
+        //Se revisa si el archivo existe
         if(!Dir.exists()){
             Dir.mkdirs();
             File ExistingPlaylists = new File("Users/" + Email + "/ExistingPlaylist.txt");
@@ -73,20 +90,21 @@ public class CreatePlaylistController {
             Playlistbw.close();
             PlaylistFileWriter.close();
         }
-    }
 
+
+    }
     /**
-     * Permite guardar la fecha en la cual fue creada la lista de reproduccion para desplegarla en la pantalla
+     * Metodo guardar la fecha y hora de creacion de la playlist en un txt
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
-     * @throws IOException
      */
+
     public static void SaveDate() throws IOException {
         String time;
-        String Email = SignInController.getEmail();
+        String Email = SignInController.getEmail();//Se obtiene el email que el usuario ingreso en la pantalla de iniciar sesion
         File dateTime = new File("Users/" + Email + "/" + getNameOfPlaylist() + "/DateTime.txt");
 
         time= String.valueOf(localTime);
-        String parts = time.substring(0,8);
+        String parts = time.substring(0,8);//Se parte el string para solo colocar en el txt la hora con minutos y segundos
 
         FileWriter LoadedSongsFileWriter = new FileWriter(dateTime, true);
 
@@ -100,10 +118,10 @@ public class CreatePlaylistController {
     }
 
 
-
-
-
-
+    /**
+     * Metodo para regresar a la pantalla de reproduccion de musica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
 
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
@@ -122,7 +140,6 @@ public class CreatePlaylistController {
             stage.show();
         }
 
-        }
+    }
 
 }
-

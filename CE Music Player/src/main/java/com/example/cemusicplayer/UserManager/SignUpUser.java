@@ -4,18 +4,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 /**
- * Clase que permite registrar un usuario en la plataforma
+ * Clase que crea la carpeta de archivos de cada usuario
  * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
  */
 public class SignUpUser {
+
     /**
-     * @param Email Email del usuario registrandose
-     * @param Username Nombre de ususario registrandose
-     * @param Province Provincia registrandose
-     * @param Password Contraseña Registrandose
-     * @throws IOException
+     * Metodo para crea la carpeta de archivos de cada usuario
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static void CreateUserFolder(String Email, String Username, String Province, String Password) throws IOException {

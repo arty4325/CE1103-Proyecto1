@@ -1,17 +1,15 @@
 package com.example.cemusicplayer.DataStructures;
-
 /**
- * Lista Doblemente enlazada circular, utilizada para reproduccion musical en la aplicacion
+ * Clase para crear la lista doblemente enlazada circular
  * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
  */
-
 public class DCLinkedList<T> {
     private DoublyNode<T> head;
     private DoublyNode<T> tail;
     private DoublyNode<T> observer;
     private int size;
     /**
-     * Se definen el head, tail y size de la lista
+     * Metodo constructor de la clase
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public DCLinkedList() {
@@ -19,12 +17,15 @@ public class DCLinkedList<T> {
         this.tail = null;
         this.size = 0;
     }
+    /**
+     * Metodo para modificar el observer
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public void ModifyObserver(DoublyNode<T> NewNode){
         this.observer = NewNode;
     }
-
     /**
-     * @param data La informacion que se quiere agregar a la lista doblementre enlazada circular
+     * Metodo para agregar un elemento de una lista
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public void add(T data){
@@ -49,10 +50,8 @@ public class DCLinkedList<T> {
         }
         this.size++;
     }
-
     /**
-     * @param position La posicion del nodo que se quiere obtener
-     * @return El nodo en la posicion indicada
+     * Metodo para obtener el nodo en una posicion específica
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public DoublyNode<T> getNode(int position){
@@ -62,7 +61,10 @@ public class DCLinkedList<T> {
         }
         return node;
     }
-
+    /**
+     * Metodo para eliminar un elemento en una posicion
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public void delete(int position){
         if(size < position || position < 0){
             throw new IndexOutOfBoundsException();
@@ -91,13 +93,15 @@ public class DCLinkedList<T> {
         }
         this.size--;
     }
+    /**
+     * Metodo para obtener el observer
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public DoublyNode<T> getObserver(){
         return observer;
     }
-
     /**
-     * Obtiene el siguiente elemento de un observador, esta implementado de manera circular para la reproduccion continua
-     * @return Retorna el elemento que esta inmediatamente despues del observer, utilizado para la reproduccion de musica
+     * Metodo para obtener el siguiente elemento de la lista
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public T getNextItem(){
@@ -115,17 +119,15 @@ public class DCLinkedList<T> {
             return observer.getData();
         }
     }
-
     /**
-     * Obtiene el siguiente elemento de un observador, esta implementado de manera circular para la reproduccion normal
-     * @return Retorna el elemento que esta inmediatamente despues del observer, utilizado para la reproduccion de musica
+     * Metodo para obtener el siguiente elemento de la lista, pero sin seguir al primer elemento cuando esta en el ultimo
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public T getNextItemNotLoop(){
         DoublyNode<T>Temp = head;
-        if(observer == tail){
+        if(observer == tail){//Se hace una verificacion para que el usuario no pueda pasar de la ultima cancion
             return getData(size - 1);
-        } else if (observer == head) {
+        } else if (observer == head) {//Se hace la verificacion para que cuando se llega a la cabeza con el get back cuando se vualva a a llamar el get back siga a la segunda cancion
             observer = getNode(2);
             return observer.getBack().getData();
         } else if (observer != null){
@@ -137,29 +139,27 @@ public class DCLinkedList<T> {
         }
     }
     /**
-     * Obtiene el elemento anterior de un observador, esta implementado de manera circular para la reproduccion continua
-     * @return Retorna el elemento que esta inmediatamente antes del observer, utilizado para la reproduccion de musica
+     * Metodo para obtener el anterior elemento de la lista
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
-     * */
-   public T getBackItem(){
-       DoublyNode<T>Temp = head;
-       if (observer != null) {
-           observer = observer.getBack();
-           Temp = observer;
-           if (Temp.getBack() != null){
-               Temp = Temp.getBack();
-           }
-           return Temp.getData();
-       } else {
-           observer = getNode(size - 1);
-           return getData(size - 1);
-       }
-   }
+     */
+    public T getBackItem(){
+        DoublyNode<T>Temp = head;
+        if (observer != null) {
+            observer = observer.getBack();
+            Temp = observer;
+            if (Temp.getBack() != null){
+                Temp = Temp.getBack();
+            }
+            return Temp.getData();
+        } else {
+            observer = getNode(size - 1);
+            return getData(size - 1);
+        }
+    }
     /**
-     * Obtiene el elemento anterior de un observador, esta implementado de manera circular para la reproduccion normal
-     * @return Retorna el elemento que esta inmediatamente antes del observer, utilizado para la reproduccion de musica
+     * Metodo para obtener el anterior elemento de la lista pero sin ir al último cuando esta en el primero
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
-     * */
+     */
     public T getBackItemNotLoop(){
         DoublyNode<T>Temp = head;
         if (observer != getNode(0) && observer != getNode(1) && observer != tail){
@@ -180,10 +180,18 @@ public class DCLinkedList<T> {
             return getNode(0).getData();
         }
     }
-
+    /**
+     * Metodo para obtener un dato en la una posicion específica
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public T getData(int position){
         return getNode(position).getData();
     }
+
+    /**
+     * Metodo para obtener el tamaño de la lista
+     * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+     */
     public int getSize(){return size;}
 
 

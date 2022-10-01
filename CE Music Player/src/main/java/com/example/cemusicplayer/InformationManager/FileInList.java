@@ -6,37 +6,38 @@ import com.example.cemusicplayer.DataStructures.LinkedList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
+/**
+ * Clase para colocar un archivo en una lista
+ * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
+ */
 public class FileInList {
 
     /**
-     * Permite cargar un archivo del computador en una lista simplemente enlazada
-     * @param file El archivo del computador que se quiere cargar en la lista
-     * @return Una lista simplemente enlazada la cual contiene los elementos del archivo ingresado
-     * @throws FileNotFoundException
+     * Metodo para cargar un archivo en lista simple
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static LinkedList<String> LoadFileOfStringsIntoList(File file) throws FileNotFoundException {
         LinkedList<String> list = new LinkedList<>();
+        //Se coloca en el scanner el archivo para leerlo
         Scanner scan = new Scanner(file);
+        //Se hace un while para que se lea mientras haya siguiente línea
         while(scan.hasNextLine()){
-            list.add(scan.nextLine());
+            list.add(scan.nextLine());//Se agrega a la lista la línea que se leyo del archivo
         }
         return list;
     }
     /**
-     * Permite cargar un archivo del computador en una lista doblemente enlazada circular
-     * @param file El archivo del computador que se quiere cargar en la lista
-     * @return Una lista simplemente enlazada la cual contiene los elementos del archivo ingresado
-     * @throws FileNotFoundException
+     * Metodo para cargar un archivo en lista doblemente enlazada circular
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     public static DCLinkedList<String> LoadFileOfStringsIntoDCLinkedList(File file) throws FileNotFoundException {
         DCLinkedList<String> list = new DCLinkedList<>();
+        //Se coloca en el scanner el archivo para leerlo
         Scanner scan = new Scanner(file);
+        //Se hace un while para que se lea mientras haya siguiente línea
         while(scan.hasNextLine()){
 
-            list.add(scan.nextLine());
+            list.add(scan.nextLine());//Se agrega a la lista la línea que se leyo del archivo
 
         }
         return list;

@@ -11,6 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 608, 408);
 
@@ -19,9 +20,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-
-        Arduino arduino = new Arduino();
-        arduino.start();
     }
 
     public static void main(String[] args){
