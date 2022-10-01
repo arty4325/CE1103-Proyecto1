@@ -17,6 +17,8 @@ public class Arduino extends Thread {
     Boolean SecondFlag4;
     Boolean SecondFlag5;
 
+
+
     @Override
     public void run() {
         Flag1 = false;
@@ -130,15 +132,17 @@ public class Arduino extends Thread {
                 }
                 if (Objects.equals(bytes[5], "1")){
                     System.out.println("Funciona next");
-;                }
+                }
                 if (Objects.equals(bytes[6], "1")){
                     System.out.println("Funciona back");
+
                 }
                 if (Objects.equals(bytes[7], "1")){
                     System.out.println("Funciona el play");
                 }
                 if (Objects.equals(bytes[8], "1")){
                     System.out.println("Funciona pausa");
+
                 }
                 if (Objects.equals(bytes[9], "1")){
                     System.out.println("Funciona Loop");

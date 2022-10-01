@@ -20,6 +20,9 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
+        Arduino arduino = new Arduino();
+        arduino.start();
     }
 
     public static void main(String[] args){

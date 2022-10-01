@@ -109,6 +109,9 @@ public class MusicPlayerController implements Initializable {
     static String ChoosedSong;
     File Metadata;
 
+
+
+
     /**
      * Metodo para reproducir la cancion anterior de la cancion actual y obtener todos sus datos
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
@@ -166,7 +169,7 @@ public class MusicPlayerController implements Initializable {
      * @author Oscar Arturo Acuña Duran 2022049304, Michael Suarez - 2021138556
      */
     @FXML
-    void NextSong(ActionEvent event) throws FileNotFoundException {
+    public void NextSong(ActionEvent event) throws FileNotFoundException {
         if (PlayingPlaylist != null) {
             if (!loop) {
 
